@@ -1,0 +1,556 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Language Models: Introduction &#8212; Reinforcement Leraning for Language Model Training</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'LLMs';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to “RL for Language Model Training”!" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo_rl.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo_rl.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to “RL for Language Model Training”!
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Language Models: Introduction</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/polina-tsvilodub/RL4-language-model-training" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/polina-tsvilodub/RL4-language-model-training/issues/new?title=Issue%20on%20page%20%2FLLMs.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/LLMs.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Language Models: Introduction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#large-language-models-llms-a-high-level-overview">Large Language Models (LLMs): a high-level overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-materials-optional">Further materials (optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#language-models">Language models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-try-llms">Where to try LLMs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-for-practical-programming-tasks">Preparing for practical programming tasks</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="language-models-introduction">
+<h1>Language Models: Introduction<a class="headerlink" href="#language-models-introduction" title="Permalink to this heading">#</a></h1>
+<p>The goal of the introductory session is to motivate the course, cover formalia and start a recap of relevant background on (large) language models (LLMs).</p>
+<section id="large-language-models-llms-a-high-level-overview">
+<h2>Large Language Models (LLMs): a high-level overview<a class="headerlink" href="#large-language-models-llms-a-high-level-overview" title="Permalink to this heading">#</a></h2>
+<p>The introductory part of the slides briefly introduces topics that will be covered throughout the class.</p>
+<p>In the second part, the core ideas behind language models are introduced. In particular, the slides cover the core idea behind language models, namely, the <em>next-word prediction task</em>. Further, the slides include a bsic introduction to the main architecture used in state-of-the-art language models, the <em>transformer</em>. Some further technical aspects of language models are discussed. The session highlights only those technical aspects of language models which are most relevant for models which are fine-tuned with RL; for more comprehensive materials on LMs in general, see <a class="reference internal" href="#content-materials-lms"><span class="std std-ref">further materials on LMs.</span></a></p>
+<p>Slides for the session can be found <a class="reference external" href="https://polina-tsvilodub.github.io/RL4LMT/01a-intro-LLMs.pdf">here</a>.</p>
+</section>
+<section id="further-materials-optional">
+<h2>Further materials (optional)<a class="headerlink" href="#further-materials-optional" title="Permalink to this heading">#</a></h2>
+<p>Below, further background materials on langauge models can be found. Additionally, resources for trying language models hands-on and preparing for the practical parts of the class are provided.</p>
+<section id="language-models">
+<span id="content-materials-lms"></span><h3>Language models<a class="headerlink" href="#language-models" title="Permalink to this heading">#</a></h3>
+<p>Below you can find a few basic optional recommendations for resources on all sort of LMs (including n-gram models, recurrent neural networks, etc) which have been developed in CL and NLP. Classical papers (also introducing concepts which are covered on the class) are referenced, as well.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://arxiv.org/pdf/2303.05759.pdf">Wei et al. (2023) An overview of language models.</a></p></li>
+<li><p><a class="reference external" href="https://web.stanford.edu/~jurafsky/slp3/3.pdf">Chapter on n-gram LMs from Jurafksy &amp; Martin. (2023) <em>Speech and Language Processing.</em></a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=PLryWeHPcBs&amp;list=PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ&amp;index=5">Lecture on RNNs from Stanford class “NLP with Deep Learning”</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=0LixFSa7yts&amp;list=PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ&amp;index=6">Lecture on LSTMs from Stanford class “NLP with Deep Learning”</a></p></li>
+<li><p><a class="reference external" href="https://www.bioinf.jku.at/publications/older/2604.pdf">Paper introducing LSTMs</a></p></li>
+<li><p><a class="reference external" href="https://aclanthology.org/N19-1423.pdf">Paper introducing the BERT model (one of the most-used architectures before GPT et al.)</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1409.0473.pdf">Paper introducing additive attention (predecessor attention mechanism to multiplicative attention used in current transformers)</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1706.03762.pdf">Paper introducing the transformer architecture as it is currently deployed (“Attention is all you need”)</a></p></li>
+</ul>
+</section>
+<section id="where-to-try-llms">
+<h3>Where to try LLMs<a class="headerlink" href="#where-to-try-llms" title="Permalink to this heading">#</a></h3>
+<p>Below you can find links where you could try state-of-the-art LLMs yourself. Please note that accessing the fanciest models requires creating accounts. The use of some models by OpenAI might even require to pay. Using the OpenAI API for accessing the models also requires to pay once the free credits one gets upon signing up are used up. Please note that <strong>you are not expected to pay</strong> for using these models in this class. Please contact me if you do have any issues  regarding model use. The first options provide a graphical interface for exploration; the last two points require programming. Later sessions of the class will also cover some basics of programmatic access of available models. Some of the referenced models are hosted on HiggingFace, a library and platform providing tools for using LMs (and other machine learning models). We will be using HuggingFace throughout the class; for an introduction, see <a class="reference internal" href="#content-materials-practical"><span class="std std-ref">practical materials</span></a></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://chat.openai.com/">ChatGPT</a>: This chat model provided by OpenAI requires an account, but allows you to play around for free using the nice graphical chat interface.</p></li>
+<li><p><a class="reference external" href="https://bard.google.com/chat">BARD</a>: This chat model is provided by Google and requires a Google account. It is also free and provides a handy graphical chat interface.</p></li>
+<li><p><a class="reference external" href="https://huggingface.co/bigscience/bloom">BLOOM</a>: This is an open-source LM optimized for multi-languagual use. You can test it via the graphical hosten inference API on HuggingFace.</p></li>
+<li><p><a class="reference external" href="https://open-assistant.io/chat">OpenAssistant</a>: This is an open source alternative to OpenAI’s GPT based models, based on the foundation model LLaMA provided by Meta AI. Using it requires a free account and it also offers a nice graphical chat interface.</p></li>
+<li><p><a class="reference external" href="https://huggingface.co/google/flan-t5-xxl">FLAN-T5-XXL</a>: Huggingface hosts a try-out playground for a large variety of other ‘more classical’ open-source models like BERT and T5. This is a link to trying out a fine-tuned version of T5, called FLAN-T5. It is also a transformer model (like GPT) which was fune-tuned on a variety of tasks.</p></li>
+<li><p><a class="reference external" href="https://huggingface.co/chat/">HuggingChat</a>: Free alternative to chatGPT based on Open Assistant’s latest model.</p></li>
+<li><p>[advanced] <a class="reference external" href="https://huggingface.co/blog/llama2">LLaMA-2</a>: Meta has released a suite of new LLMs of different sizes (7B, 13B, 70B parameters), both in pretraining-only and fine-tuned (with RL) versions. Trying the model requires requesting credentials from Meta <a class="reference external" href="https://ai.meta.com/resources/models-and-libraries/llama-downloads/">here</a>. Upon receiving an access token and download instructions, you can try to run the model using the code provided by Meta, or by using the <a class="reference external" href="https://huggingface.co/blog/llama2#inference">HuggingFace library endpoint</a>. The latter requires requesting a separate access token to the HuggigFace version of LLaMA-2 and a HuggingFace Hub account.</p>
+<ul>
+<li><p><strong>Warning</strong>: running the smallest (7B) model locally requires at least 24GB RAM as well as certain Python packages being installed. Installing packages in a separate environment only is strongly recommended. Running the model locally might be non-trivial on MacOS. Please reach out to me if you run into issues.</p></li>
+</ul>
+</li>
+<li><p>[advanced] <a class="reference external" href="https://platform.openai.com/docs/api-reference/introduction">OpenAI API</a>: If you are familiar with getting your hands dirty with LMs and would like to generate some text from the latest GPT models, feel free to have a look at the OpenAI API which allows you to generate predictions from the latest non open-source models. <strong>WARNING:</strong> you have to pay for using their API (either with the $20 free credit you receive when signing up or via your saved payment method), so please pay attention to how many tokens you generate and note that this is your own responsibility.</p></li>
+</ul>
+<p>There are several other big players (e.g., PALM by Google) in the field of LLMs which are not available for public testing or don’t have graphical test interfaces. We will discuss currently main models in the next sessions in more detail.</p>
+</section>
+<section id="preparing-for-practical-programming-tasks">
+<span id="content-materials-practical"></span><h3>Preparing for practical programming tasks<a class="headerlink" href="#preparing-for-practical-programming-tasks" title="Permalink to this heading">#</a></h3>
+<p>The following is a list of additional material, in case you would like to recap various topics (at different levels) which will come in handy in the next sessions. These are not a prerequisite for the next classes and we will walk through all the important concepts in class. Of course, these are just single suggestions in the sea of content on the internet meant to kick start the recommendation algorithm – you are welcome to browse and choose your own favorites.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=kqtD5dpn9C8">Basic Python recap (1h)</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=7eh4d6sabA0">Python for machine learning &amp; data science in general (50min)</a></p></li>
+<li><p><a class="reference external" href="https://youtu.be/aircAruvnKk">Introduction to neural networks</a></p></li>
+<li><p><a class="reference external" href="https://youtu.be/IC0_FRiX-sw">PyTorch for deep learning, a brief introduction (30 min)</a></p></li>
+<li><p><a class="reference external" href="https://youtu.be/SZorAJ4I-sA">High level introduction to the transformers architecture in general</a></p></li>
+<li><p><a class="reference external" href="https://youtu.be/iDulhoQ2pro">Vaswani et al (2017): Attention is all you need. A walk through of one of the original papers on the transformers architecture</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=QEaBAZQCtwE">Introduction to the Huggingface library</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to “RL for Language Model Training”!</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#large-language-models-llms-a-high-level-overview">Large Language Models (LLMs): a high-level overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-materials-optional">Further materials (optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#language-models">Language models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-try-llms">Where to try LLMs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-for-practical-programming-tasks">Preparing for practical programming tasks</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Polina Tsvilodub
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
