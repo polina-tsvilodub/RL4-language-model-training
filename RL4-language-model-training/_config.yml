@@ -20,6 +20,11 @@ latex:
 bibtex_bibfiles:
   - references.bib
 
+sphinx:
+  config:
+    html_extra_path: ['slides', 'data']
+    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    
 # Information about where the book exists on the web
 repository:
   url: https://github.com/polina-tsvilodub/RL4-language-model-training  # Online location of your book

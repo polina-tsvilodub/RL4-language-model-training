@@ -38,7 +38,7 @@ The course schedule below is *preliminary*.
 |            | November 1st  | **holiday** (hands-on exercises)                                                                      |
 | 3          | November 8th  | Reinforcement learning (part 2): Discussing hands-on exercises & Policy gradient methods (TRPO, PPO)  |
 | 4          | November 15th | Reinforcement learning (part 3): Policy gradient methods & RLHF (reward model training)               |
-| 5          | November 22nd | Discussion of literature (RL in LLM training) -- Presentations                                        |
+| 5          | November 22nd | Discussion of literature (RL in LLM training)                                     |
 | 6          | November 29th | Hands-on: Effects of RL: 'behavioral' experiments; benchmark comparisons                              |
 | 7          | December 6th  | Hands-on: Effects of RL: representational comparisons                                                 |
 | 8          | December 13th | Hands-on: TBD                                                                                         |
@@ -47,5 +47,5 @@ The course schedule below is *preliminary*.
 | 10         | January 10th  | Effects of RL: Social implications                                                                    |
 | 11         | January 17th  | Limitations of RL for language model training                                                         |
 | 12         | January 24th  | LLMs as a concept: simulators, agents, classifiers                                                    |
-| 13         | January 31st  | Exam / presentations                                                                                  |
+| 13         | January 31st  | Final session (final assignment)                                                                                  |
 |            | February 7th  | **no class**                                                                                          |

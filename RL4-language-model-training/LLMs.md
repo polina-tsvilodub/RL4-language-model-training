@@ -9,7 +9,7 @@ The introductory part of the slides briefly introduces topics that will be cover
 
 In the second part, the core ideas behind language models are introduced. In particular, the slides cover the core idea behind language models, namely, the *next-word prediction task*. Further, the slides include a bsic introduction to the main architecture used in state-of-the-art language models, the *transformer*. Some further technical aspects of language models are discussed. The session highlights only those technical aspects of language models which are most relevant for models which are fine-tuned with RL; for more comprehensive materials on LMs in general, see [further materials on LMs.](content:materials:lms)
 
-Slides for the session can be found [here](<https://polina-tsvilodub.github.io/RL4LMT/01a-intro-LLMs.pdf>).
+Slides for the session can be found [here](<https://polina-tsvilodub.github.io/RL4-language-model-training/01a-intro-LLMs.pdf>).
 
 ## Further materials (optional)
 
