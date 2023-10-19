@@ -10,7 +10,7 @@ Reinforcement learning (RL) has gained recurring attention in the context of lar
 
 In the class “RL for language model training”, we will discuss practical and technical aspects of RL fine-tuning (e.g., RLHF), cutting-edge research on the effects and limitations of RL in the context of LLM training, as well as open societal questions like alignment. The goal of the class is to get a more detailed understanding of RL fine-tuning of LLMs from an interdisciplinary perspective. 
 
-The course will take place on **Wednesdays, 12--14 (c.t.), in Keplerstraße 2 (OSA), room 181**. The course is intended for master students or advanced bachelor students who are interested in linguistics / NLP / ML / interdisciplinary approaches to technical advances in development of LLMs. Familiarity with language models and programming is encouraged but not strictly required. Familiarity with reinforcement learning is *not* required.
+The course will take place on **Wednesdays, 12:30--14 (s.t.), in  Nauklerstr. 35, seminar room 1**. The course is intended for master students or advanced bachelor students who are interested in linguistics / NLP / ML / interdisciplinary approaches to technical advances in development of LLMs. Familiarity with language models and programming is encouraged but not strictly required. Familiarity with reinforcement learning is *not* required.
 
 More details about the covered topics and the preliminary schedule can be found below, as well as in the introductory slides for the first session.
 
