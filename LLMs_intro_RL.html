@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -146,13 +146,14 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     
     
       
     
     
-    <img src="_static/logo_rl.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/logo_rl.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/logo_rl.png" class="logo__image only-light" alt="Reinforcement Learning for Language Model Training - Home"/>
+    <script>document.write(`<img src="_static/logo_rl.png" class="logo__image only-dark" alt="Reinforcement Learning for Language Model Training - Home"/>`);</script>
   
   
 </a></div>
@@ -385,13 +386,27 @@ document.write(`
 Furthermore, a conceptual motivation and a high-level introduction to reinforcement learning (RL) is provided.</p>
 <section id="transformers-training-and-rl">
 <h2>Transformers, Training and RL<a class="headerlink" href="#transformers-training-and-rl" title="Permalink to this heading">#</a></h2>
-<p>In this session, some additional details of the transformers architecure are discussed. Then, teacher-forcing based training of language models is briefly reviewed. This concludes the basic introduction / recap of core language models.
-The second part of the session motivates reinforcement learning and briefly situates it in the field of machine learning. Then, core concepts of RL like states, actions, policy etc. are introduced. The introduction is rather informal; the main goal is to develop some intuitions about these terms.</p>
+<p>In this session, some additional details of the transformers architecure are discussed. Then, teacher-forcing based training of language models is briefly reviewed. Important concepts around inference with trained LMs (e.g., decoding schemes, prompting) are highlighted. This concludes the basic introduction / recap of core language models.</p>
+<p>The second part of the session motivates reinforcement learning in the context of LMs and briefly situates it in the field of machine learning. Then, core concepts of RL like states, actions, policy etc. are introduced. The introduction is rather informal; the main goal is to develop some intuitions about these terms.</p>
 <p>Slides for the session can be found <a class="reference external" href="https://polina-tsvilodub.github.io/RL4-language-model-training/02a-LLMs-training-RL.pdf">here</a>.</p>
 </section>
 <section id="further-materials-optional">
 <h2>Further materials (optional)<a class="headerlink" href="#further-materials-optional" title="Permalink to this heading">#</a></h2>
-<p>Below, further background materials on langauge models can be found. Additionally, resources for trying language models hands-on and preparing for the practical parts of the class are provided.</p>
+<p>Below, further materials on transformers, language model training, decoding schemes and basic RL concepts can be found.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://arxiv.org/pdf/2104.09864.pdf">Rotatory Position Embeddings (RoPE): a popular SOTA positional encoding methods used in, e.g., LLaMA</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=5vcj8kSwBCY">Great lecture by Vaswani about the Transformer architecture</a></p></li>
+<li><p><a class="reference external" href="https://huggingface.co/learn/nlp-course/chapter7/6#training-a-causal-language-model-from-scratch">NLP course chapter from HuggingFace oon how to train LMs (using their training wrappers)</a></p></li>
+<li><p><a class="reference external" href="https://www.deeplearningbook.org/">Goodfellow et al. (2016). Deep Learning</a></p>
+<ul>
+<li><p>an encyclopaedic webbook on deep learning working through general concepts related to neural networks, training, optimization etc.</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2016/file/16026d60ff9b54410b3435b403afd226-Paper.pdf">Paper explaining potential short-comings of teacher-forcing based training and suggesting an alternative</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1904.09751.pdf">Classic paper introducing nucleus-sampling</a></p></li>
+<li><p><a class="reference external" href="https://www.promptingguide.ai/">Webbook on current prompting techniques</a></p></li>
+<li><p><a class="reference external" href="https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf"><strong>Sutton &amp; Barto (2018). Reinforcement learning: An Introduction.</strong></a></p></li>
+</ul>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Permalink to this heading">#</a></h2>
@@ -514,8 +529,8 @@ By Polina Tsvilodub
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script src="_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
 
   <footer class="bd-footer">
   </footer>

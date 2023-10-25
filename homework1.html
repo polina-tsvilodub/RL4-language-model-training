@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -147,13 +147,14 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     
     
       
     
     
-    <img src="_static/logo_rl.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/logo_rl.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/logo_rl.png" class="logo__image only-light" alt="Reinforcement Learning for Language Model Training - Home"/>
+    <script>document.write(`<img src="_static/logo_rl.png" class="logo__image only-dark" alt="Reinforcement Learning for Language Model Training - Home"/>`);</script>
   
   
 </a></div>
@@ -471,13 +472,11 @@ To speed up the execution of the code on Colab (especially Exercise 1), you can 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># import huggingface</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;transformers&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>None of PyTorch, TensorFlow &gt;= 2.0, or Flax have been found. Models won&#39;t be available and only tokenizers, configuration and file/data utilities can be used.
 </pre></div>
 </div>
 </div>
@@ -487,6 +486,57 @@ To speed up the execution of the code on Colab (especially Exercise 1), you can 
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generator</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s1">&#39;text-generation&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s1">&#39;EleutherAI/gpt-neo-1.3B&#39;</span><span class="p">)</span>
 
 <span class="c1">### YOUR CODE HERE ###</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading (…)lve/main/config.json:   0%|          | 0.00/1.35k [00:00&lt;?, ?B/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading (…)lve/main/config.json: 100%|██████████| 1.35k/1.35k [00:00&lt;00:00, 380kB/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">generator</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s1">&#39;text-generation&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s1">&#39;EleutherAI/gpt-neo-1.3B&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1">### YOUR CODE HERE ###</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/transformers/pipelines/__init__.py:834,</span> in <span class="ni">pipeline</span><span class="nt">(task, model, config, tokenizer, feature_extractor, image_processor, framework, revision, use_fast, token, device, device_map, torch_dtype, trust_remote_code, model_kwargs, pipeline_class, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">832</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="n">framework</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">833</span>     <span class="n">model_classes</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;tf&quot;</span><span class="p">:</span> <span class="n">targeted_task</span><span class="p">[</span><span class="s2">&quot;tf&quot;</span><span class="p">],</span> <span class="s2">&quot;pt&quot;</span><span class="p">:</span> <span class="n">targeted_task</span><span class="p">[</span><span class="s2">&quot;pt&quot;</span><span class="p">]}</span>
+<span class="ne">--&gt; </span><span class="mi">834</span>     <span class="n">framework</span><span class="p">,</span> <span class="n">model</span> <span class="o">=</span> <span class="n">infer_framework_load_model</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">835</span>         <span class="n">model</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">836</span>         <span class="n">model_classes</span><span class="o">=</span><span class="n">model_classes</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">837</span>         <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">838</span>         <span class="n">framework</span><span class="o">=</span><span class="n">framework</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">839</span>         <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">840</span>         <span class="o">**</span><span class="n">hub_kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">841</span>         <span class="o">**</span><span class="n">model_kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">842</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">844</span> <span class="n">model_config</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">config</span>
+<span class="g g-Whitespace">    </span><span class="mi">845</span> <span class="n">hub_kwargs</span><span class="p">[</span><span class="s2">&quot;_commit_hash&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">_commit_hash</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/transformers/pipelines/base.py:220,</span> in <span class="ni">infer_framework_load_model</span><span class="nt">(model, config, model_classes, task, framework, **model_kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">194</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">195</span><span class="sd"> Select framework (TensorFlow or PyTorch) to use from the `model` passed. Returns a tuple (framework, model).</span>
+<span class="g g-Whitespace">    </span><span class="mi">196</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">217</span><span class="sd">     `Tuple`: A tuple framework, model.</span>
+<span class="g g-Whitespace">    </span><span class="mi">218</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">219</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_tf_available</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_torch_available</span><span class="p">():</span>
+<span class="ne">--&gt; </span><span class="mi">220</span>     <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">221</span>         <span class="s2">&quot;At least one of TensorFlow 2.0 or PyTorch should be installed. &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">222</span>         <span class="s2">&quot;To install TensorFlow 2.0, read the instructions at https://www.tensorflow.org/install/ &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span>         <span class="s2">&quot;To install PyTorch, read the instructions at https://pytorch.org/.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">224</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">225</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">226</span>     <span class="n">model_kwargs</span><span class="p">[</span><span class="s2">&quot;_from_pipeline&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">task</span>
+
+<span class="ne">RuntimeError</span>: At least one of TensorFlow 2.0 or PyTorch should be installed. To install TensorFlow 2.0, read the instructions at https://www.tensorflow.org/install/ To install PyTorch, read the instructions at https://pytorch.org/.
 </pre></div>
 </div>
 </div>
@@ -1002,8 +1052,8 @@ By Polina Tsvilodub
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script src="_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
 
   <footer class="bd-footer">
   </footer>

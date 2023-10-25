@@ -21,9 +21,9 @@ More details about the covered topics and the preliminary schedule can be found 
 
 The course will take place **in-person** (unless announced otherwise) on Wednesdays, 12-2pm (c.t.). By default, participation is rewarded with 3 ECTS, but mire credits can be earned upon completing additional work. The rough respective requirements are listed below.
 
-* 3 ECTS: active participation in class, completion of exercises, passing final assignment (format tbd).
-* 6 ECTS: active participation in class, completion of exercises, passing final assignment (format tbd), hands-on project (format tbd).
-* 9 ECTS: active participation in class, completion of exercises, passing final assignment (format tbd), large hands-on project (format tbd) or hands-on project and written report.
+* 3 ECTS: active participation in class, completion of 3 homework exercise sheets, passing a poster submission.
+* 6 ECTS: active participation in class, completion of 3 homework exercise sheets, passing a poster submission, hands-on project in groups.
+* 9 ECTS: active participation in class, completion of 3 homework exercise sheets, passing a poster submission, hands-on project in groups, in-class presentation.
 
 Course materials will mainly be made available through this class website. The course Moodle page will be used for anouncements and sharing papers. You are warmly encouraged to use the forum for active discussions beyond class sessions.
 
