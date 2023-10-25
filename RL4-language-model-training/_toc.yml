@@ -5,3 +5,6 @@ format: jb-book
 root: intro
 chapters:
 - file: LLMs
+- file: LLMs_intro_RL
+  sections:
+    - homework1
