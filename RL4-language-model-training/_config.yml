@@ -12,6 +12,7 @@ execute:
   exclude_patterns:
     - 'homework1'
   execute_notebooks: force
+  stderr_output: remove
 
 
 # Define the name of the latex output file for PDF builds
