@@ -7,4 +7,4 @@ chapters:
 - file: LLMs
 - file: LLMs_intro_RL
   sections:
-    - homework1
+    - file: homework1
