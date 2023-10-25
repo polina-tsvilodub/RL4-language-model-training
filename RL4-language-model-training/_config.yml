@@ -1,7 +1,7 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Reinforcement Leraning for Language Model Training
+title: Reinforcement Learning for Language Model Training
 author: Polina Tsvilodub
 copyright: "2023"
 logo: logo_rl.png
@@ -9,7 +9,10 @@ logo: logo_rl.png
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
+  exclude_patterns:
+    - 'homework1'
   execute_notebooks: force
+
 
 # Define the name of the latex output file for PDF builds
 latex:
