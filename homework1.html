@@ -1,0 +1,1011 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Homework 1 &#8212; Reinforcement Learning for Language Model Training</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'homework1';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Language Model Training &amp; Introduction to RL" href="LLMs_intro_RL.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo_rl.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo_rl.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to “RL for Language Model Training”!
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="LLMs.html">Language Models: Introduction</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="LLMs_intro_RL.html">Language Model Training &amp; Introduction to RL</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Homework 1</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/polina-tsvilodub/RL4-language-model-training/blob/main/RL4-language-model-training/homework1.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/polina-tsvilodub/RL4-language-model-training" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/polina-tsvilodub/RL4-language-model-training/issues/new?title=Issue%20on%20page%20%2Fhomework1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/homework1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Homework 1</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework-logistics">Homework logistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminaries">Preliminaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-20-points">Exercise 1 (20 points)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-1-5-points">Exercise 1.1 (5 points)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-2-15-points">Exercise 1.2 (15 points)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-10-points">Exercise 2 (10 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-20-points">Exercise 3 (20 points)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="homework-1">
+<h1>Homework 1<a class="headerlink" href="#homework-1" title="Permalink to this heading">#</a></h1>
+<p>The learning goals of this first hands-on sheet are:</p>
+<ul class="simple">
+<li><p>to make sure that you can execute code on your machines or on Google Colab in order to experiment with LMs and RL yourself!</p></li>
+<li><p>to familiarize yourself with the <a class="reference external" href="https://medium.com/nlplanet/two-minutes-nlp-beginner-intro-to-hugging-face-main-classes-and-functions-fb6a1d5579c4">HuggingFace library</a> which provides many pretrained LMs and handy tools for working with them,</p></li>
+<li><p>to develop basic intuitions about core RL concepts,</p></li>
+<li><p>and to train your first RL agent!</p></li>
+</ul>
+<p>Most importantly, the homework is intended to showcase important practical aspects, provide space for learning how to find solutions to practical problems, and further conceptual understanding of the topics we discuss in class. It is <em>not</em> meant to dismay you. Therefore, even if you don’t have a lot of ML / programming / technical background, you are warmly encouraged to take on the tasks, ask questions and discuss any concerns you have (with fellow students or me). There are also some hints and links to resources throughout the tasks which may help you get information which will help solving the tasks.</p>
+<section id="homework-logistics">
+<h2>Homework logistics<a class="headerlink" href="#homework-logistics" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>You will have two weeks to complete the assignment (until Wed, November 8th, 12:30pm).</p></li>
+<li><p><strong>Please do and submit your homework by yourself!</strong></p></li>
+<li><p>However, you are warmly encouraged to ask questions and help each other, without posting full solutions, via active discussions in the dedicated Forum space on Moodle (“Homework 1”). Most active participants of the Forum discussions will earn some extra points for their grade!</p></li>
+<li><p>Please submit your solutions via Moodle. You will find a quiz called “Homework 1” with questions and answer fields corresponding the respective exercise numbers listed below.</p></li>
+<li><p>If you have questions or difficulties with the homework, please try to solve them with the help of your fellow students via Forum. However, I will also offer a <strong>consultation session on Tuesday, October 31st, 2pm-4pm, on Zoom</strong>, under the usual class link. Also don’t hesitate to reach out to me via email if you have any questions, struggle or feel overwhelmed.</p></li>
+</ul>
+</section>
+<section id="preliminaries">
+<h2>Preliminaries<a class="headerlink" href="#preliminaries" title="Permalink to this heading">#</a></h2>
+<p>The exercises below will require you to execute Python code. You can do so either on your own machine, or by using <a class="reference external" href="https://colab.research.google.com/">Google Colab</a> (free, only requires a Google account). You can easily do the latter by pressing the Colab icon at the top of the webook’s page.
+You are encouraged to use the Colab option to avoid complications with local package installations etc.
+To speed up the execution of the code on Colab (especially Exercise 1), you can use the available GPU. For that, before executing your code, navigate to Runtime &gt; Change runtime type &gt; GPU &gt; Save.</p>
+<p>However, if you do want to run the code locally on your machine, I strongly encourage you to create an environment (e.g., with Conda) before you install any dependencies, and please keep in mind that pretrained language model weights might take up quite a bit of space on your hard drive or might require high RAM for prediction. In particular, the model used in these exercises requires 6GB disc space and <strong>around 8GB RAM</strong> for stable training.</p>
+<p>Note that the class uses PyTorch. For those of you who wish to complete final projects which include programming, you are also free to use TensorFlow for that (but I may be able to provide less support with that).</p>
+</section>
+<section id="exercise-1-20-points">
+<h2>Exercise 1 (20 points)<a class="headerlink" href="#exercise-1-20-points" title="Permalink to this heading">#</a></h2>
+<p>In this exercise, we will load a pretrained LM from HuggingFace and explore how to work with it, using the tools provided by the library.</p>
+<section id="exercise-1-1-5-points">
+<h3>Exercise 1.1 (5 points)<a class="headerlink" href="#exercise-1-1-5-points" title="Permalink to this heading">#</a></h3>
+<p>Your task is to use the pretrained model “GPT-NEO” (1.3B parameters) to <em>run inference</em>. In particular, your task is to complete the code below in order to produce a continuation for the sentence “Reinforcement learning is ” using <strong>beam search with k=5</strong>. (Hint: beam-search is a particular <em>decoding scheme</em> used on top of trained language models. If you are not familiar with it, please do some research to get an overall idea about it as part of this task.)</p>
+<p>You can find information for completing the code, e.g., <a class="reference external" href="https://huggingface.co/docs/transformers/main_classes/pipelines#transformers.TextGenerationPipeline">here</a>.</p>
+<p><strong>TASK</strong>: Please submit your result (i.e., produced text) on Moodle and answer questions about the code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># note: if you are running the code on Colab, you may need to install the HuggingFace &#39;transformers&#39; library</span>
+<span class="c1"># for that, uncomment and run the following line:</span>
+
+<span class="c1"># !pip install transformers</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import huggingface</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># import huggingface</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;transformers&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generator</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s1">&#39;text-generation&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s1">&#39;EleutherAI/gpt-neo-1.3B&#39;</span><span class="p">)</span>
+
+<span class="c1">### YOUR CODE HERE ###</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-1-2-15-points">
+<h3>Exercise 1.2 (15 points)<a class="headerlink" href="#exercise-1-2-15-points" title="Permalink to this heading">#</a></h3>
+<p>Your task is to complete the code below in order to <em>fine-tune</em> the model for question answering on the <a class="reference external" href="https://huggingface.co/datasets/truthful_qa">“Truthful QA” dataset</a>.
+The goal of this exercise is to understand the basic components that go into fine-tuning an LM from first-hand experience. Therefore, you can run the fine-tuning just for a couple of training steps.</p>
+<p>For convenience, the data loading process is already implemented for you.
+You can find relevant information for completing the task <a class="reference external" href="https://huggingface.co/transformers/v3.3.1/training.html#fine-tuning-in-native-pytorch">here</a>.</p>
+<p><strong>TASK</strong>: Please post the code from the cell where you completed something on Moodle. Please answer questions about the other parts of the code on Moodle.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># first, we import the necessary libraries</span>
+<span class="c1"># again, use !pip install ... if libraries are missing on Colab</span>
+<span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">DataLoader</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModelForCausalLM</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load the dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;truthful_qa&quot;</span><span class="p">,</span> <span class="s2">&quot;generation&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># inspect a sample from the dataset to get an idea of the formatting</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;validation&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1"># the dataset only has a &#39;validation&#39; split, so we use that. </span>
+<span class="c1"># for simplicity, we are not further splitting the data into train/val/test</span>
+<span class="c1"># but just using everything for training</span>
+<span class="n">dataset_val</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;validation&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load pretrained tokenizer and model</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;EleutherAI/gpt-neo-1.3B&quot;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;EleutherAI/gpt-neo-1.3B&quot;</span><span class="p">)</span>
+<span class="c1"># add padding token to tokenizer</span>
+<span class="n">tokenizer</span><span class="o">.</span><span class="n">pad_token</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">eos_token</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a pytorch dataset wrapper around the huggingface dataset</span>
+<span class="c1"># which will allow for easy preprocessing and formatting</span>
+<span class="k">class</span> <span class="nc">TruthfulQADataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper class to create a pytorch dataset.</span>
+<span class="sd">    Each sample if formatted with &#39;Question: {question} Answer:&#39; prefixes.</span>
+<span class="sd">    Also pads and truncates the strings to a given maximum length,</span>
+<span class="sd">    so that they can be batched.</span>
+<span class="sd">    The implemented methods are required by pytorch.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dataset : huggingface dataset</span>
+<span class="sd">        The dataset to wrap around.</span>
+<span class="sd">    tokenizer : huggingface tokenizer</span>
+<span class="sd">        The tokenizer to use for tokenization.</span>
+<span class="sd">    max_length : int</span>
+<span class="sd">        The maximum length of the input and output sequences.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">128</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">tokenizer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_length</span> <span class="o">=</span> <span class="n">max_length</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a single preprocessed sample from the dataset,</span>
+<span class="sd">        at given index idx.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">question</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;question&#39;</span><span class="p">]</span>
+        <span class="n">answer</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;best_answer&#39;</span><span class="p">]</span>
+        <span class="nb">input</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Question: </span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="s2"> Answer:&quot;</span>
+        <span class="n">input_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+            <span class="nb">input</span><span class="p">,</span> 
+            <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span><span class="p">,</span> 
+            <span class="n">max_length</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_length</span><span class="p">,</span> 
+            <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;max_length&#39;</span><span class="p">,</span> 
+            <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="n">answer_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+            <span class="n">answer</span><span class="p">,</span> 
+            <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span><span class="p">,</span> 
+            <span class="n">max_length</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_length</span><span class="p">,</span> 
+            <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;max_length&#39;</span><span class="p">,</span> 
+            <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">input_ids</span><span class="p">,</span> <span class="n">answer_ids</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># instantiate dataset</span>
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">TruthfulQADataset</span><span class="p">(</span><span class="n">dataset_val</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">)</span>
+<span class="c1"># create a DataLoader for the dataset</span>
+<span class="c1"># the data loader will automatically batch the data</span>
+<span class="c1"># and iteratively return training examples (question answer pairs) in batches</span>
+<span class="n">dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
+    <span class="n">train_dataset</span><span class="p">,</span> 
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> 
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># trianing configutations </span>
+<span class="c1"># feel free to play around with these</span>
+<span class="n">epochs</span>  <span class="o">=</span> <span class="mi">1</span>
+<span class="n">train_steps</span> <span class="o">=</span>  <span class="mi">100</span>
+<span class="c1"># using the GPU if available</span>
+<span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span>
+<span class="k">elif</span> <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">mps</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;mps&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cpu&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using device:&quot;</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+<span class="c1"># put the model in training mode</span>
+<span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+<span class="c1"># move the model to the device (e.g. GPU)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="c1"># define optimizer and learning rate</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="c1">### YOUR CODE HERE ###</span>
+
+<span class="c1"># define some variables to accumulate the losses</span>
+<span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># iterate over epochs</span>
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="c1"># iterate over training steps</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">train_steps</span><span class="p">):</span>
+        <span class="c1"># get a batch of data</span>
+        <span class="c1"># x are questions, y are ground truth answers</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">dataloader</span><span class="p">))</span>
+        <span class="c1"># move the data to the device (GPU)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="c1"># forward pass through the model</span>
+        <span class="c1">### YOUR CODE HERE ###</span>
+        <span class="c1"># get the loss</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="c1">### YOUR CODE HERE ###</span>
+        <span class="c1"># backward pass</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+        <span class="c1"># update the parameters of the model</span>
+        <span class="c1">### YOUR CODE HERE ###</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test the model</span>
+
+<span class="c1"># set it to evaluation mode</span>
+<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="c1"># generate some text for one of the questions from the dataset</span>
+<span class="n">question</span> <span class="o">=</span> <span class="n">dataset_val</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;question&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Question: &quot;</span><span class="p">,</span> <span class="n">question</span><span class="p">)</span>
+<span class="c1"># tokenize the question and generate an answer</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Question: </span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="s2"> Answer:&quot;</span>
+<span class="n">input_ids</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
+<span class="n">prediction</span> <span class="o">=</span> <span class="c1">### YOUR CODE HERE ###</span>
+<span class="c1"># decode the prediction</span>
+<span class="n">answer</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Predicted answer after fine-tuning: &quot;</span><span class="p">,</span> <span class="n">answer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the fine-tuning loss</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Training steps&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="exercise-2-10-points">
+<h2>Exercise 2 (10 points)<a class="headerlink" href="#exercise-2-10-points" title="Permalink to this heading">#</a></h2>
+<p>The goal of this exercise is to apply basic concepts of reinforcement learning to one of the “holy grail” tasks in machine learning and AI – chess.</p>
+<p>Your task is to map concepts like “agent”, “action”, and “state” that we have discussed in class onto their “real-world” counterparts in the game of chess (e.g., played by a computer program).</p>
+<p><strong>TASK:</strong> Please fill in your responses on Moodle.</p>
+</section>
+<section id="exercise-3-20-points">
+<h2>Exercise 3 (20 points)<a class="headerlink" href="#exercise-3-20-points" title="Permalink to this heading">#</a></h2>
+<p>In this exercise, you will train your very first RL agent!</p>
+<p>Imagine that your agent just moved to a new town and is exploring the local restaurants. There are 10 restaurants with the names 0, 1, …, 9 in this town.
+The agent does not know anything about the restaurants in the beginning (and also mysteriously cannot find any reviews to look at). Therefore, she needs to try the restaurants herself and try to figure out which one will make her the happiest during her time in this town (i.e., will give her the highest expected reward).</p>
+<p>This problem of trying to choose which action (i.e., going to which restaurant) is reward-maximizing in one situation, given several action options, is a (simplified) instance of a the so-called <em>k-armed bandit problem</em> (where <em>k</em> is the number of avialable actions, here: 10). This problem is very well-studied in RL.</p>
+<p>For this exercise, we assume a number of simplifications. We assume that the quality of the restaurants is deterministic (i.e., doesn’t change over the times the agents goes there), and the agent’s preferences don’t change over time, either. (Hint: what does this mean for the value of actions and the rewards?)</p>
+<p>Based on these assumptions, in this exercise, we apply a simple algorithm estimating the <em>values of the available actions</em> <span class="math notranslate nohighlight">\(a \in A\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> (think: subjective value of going to the restaurant for the agent, e.g., degree of feeling happy upon eating there):</p>
+<div class="math notranslate nohighlight">
+\[Q_t(a)\]</div>
+<p>Specifically, we will apply a simple <strong>sample-average</strong> method for estimating the value of actions at time <span class="math notranslate nohighlight">\(t\)</span> wherein the action-values are estimated as averages of the rewards that were received in the past for choosing the respective actions:</p>
+<div class="math notranslate nohighlight">
+\[ Q_t(a) = \frac{\sum_{i=1}^{t-1} R_{i | A_i = a}}{\sum_{i=1}^{t-1} \mathbb{1}_{A_i = a}}\]</div>
+<p>Time <span class="math notranslate nohighlight">\(t\)</span> here refers to the t-th time the agent is deciding which restaurant to go to in this new town.
+Based on the estimated action values, we will derive two different ‘strategies of behavior’ (i.e., <em>policies</em>): the greedy and the <span class="math notranslate nohighlight">\(\epsilon\)</span>-greedy policy.</p>
+<p><strong>TASK:</strong> Your task is to complete the code below to train the agent to explore the restaurants and answer some questions about the results on Moodle.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import libraries</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For this <span class="math notranslate nohighlight">\(k\)</span>-armed restaurant bandit environment, we assume that there is a ground truth value of each of the restaurants for the agent. For instance, we know that the agent’s favorite food is Thai curry, and e.g. restaurant 4 has the best Thai curry in town – therefore, restaurant 4 would have the highest true value. Formally, the true value of an action is:</p>
+<div class="math notranslate nohighlight">
+\[ q_*(a) = \mathbb{E}[R_t \mid A_t = a] \]</div>
+<p>On the other hand, the values of the other restaurants might be lower, or even negative (e.g., the agent gets food-poisoning when going there). For tpur simulation, these true values are defined below. These ground truth values are initially unknown to our agent, and her task is to estimate them from experience.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define possible actions (10 restaurant in the new town)</span>
+<span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+
+<span class="c1"># sample the true values of the actions for the agent</span>
+<span class="n">true_restaurant_rewards</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">true_restaurant_rewards</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In our toy world, the agent tries the different restaurants for multiple days and receives a reward (e.g., writes down her subjective happiness value) every time she went to a restaurant. A single trial is generated by the environment below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">town_environment</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">true_restaurant_rewards</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The town environment returns &#39;an experience&#39; of our agent,</span>
+<span class="sd">    i.e., the reward associated with a given action.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">reward</span> <span class="o">=</span> <span class="n">true_restaurant_rewards</span><span class="p">[</span><span class="n">action</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">reward</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Your task is to complete the code below so as to implement the estimation of the action values based on past experiences. In particular, your task is to implement an algorith estimating the values of actions based on accumulating experience, and track the expected reward (i.e., mean reward) that the agent would receive if she behaved according to her estimates given the particular amount of experience.</p>
+<p>Specifically, the function below should implement the <em>sample-average</em> estimation (defined above) and return an action according to the current estimate. For action selection, please implement two policies:</p>
+<ul class="simple">
+<li><p>a greedy policy (returning the action with the highest value according to the current estimate)</p></li>
+<li><p>an <span class="math notranslate nohighlight">\(\epsilon\)</span>-greedy policy (returning the action with the highest value according to the current estimate in 1-<span class="math notranslate nohighlight">\(\epsilon\)</span> proportions of the decisions, and returning a randomly chosen action in <span class="math notranslate nohighlight">\(\epsilon\)</span> proportion of cases). You are free to choose your own value of <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sample_average_estimator</span><span class="p">(</span><span class="n">old_actions</span><span class="p">,</span> <span class="n">old_rewards</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Implement the sample-average estimator of the action values.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    old_actions : numpy array</span>
+<span class="sd">        The actions taken by the agent before the current step.</span>
+<span class="sd">    old_rewards : numpy array</span>
+<span class="sd">        The rewards received by the agent before the current step</span>
+<span class="sd">        for the taken actions.</span>
+<span class="sd">    epsilon: float</span>
+<span class="sd">        The probability of taking a random action.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    values : numpy array</span>
+<span class="sd">        The estimated values of the actions.</span>
+<span class="sd">    best_action : int</span>
+<span class="sd">        The best action according to the estimated values and the </span>
+<span class="sd">        current policy.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># initially, the values of all actions are 0</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="c1">###YOUR CODE HERE###)</span>
+    <span class="c1"># compute averages over previously observed rewards </span>
+    <span class="c1"># for each action</span>
+    <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+        <span class="n">old_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">old_actions</span> <span class="o">==</span> <span class="n">action</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">old_indices</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1">###YOUR CODE HERE###</span>
+        <span class="n">values</span><span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="o">=</span> <span class="c1">###YOUR CODE HERE###</span>
+    <span class="c1"># return a random action with probability epsilon</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">:</span>
+        <span class="c1">###YOUR CODE HERE###</span>
+    <span class="c1"># return the action with the highest value with random tie-breaking with probability 1 - epsilon</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">values</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">values</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">best_action</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">values</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">values</span><span class="p">))[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1">###YOUR CODE HERE###</span>
+            
+    <span class="c1"># return the actions&#39; updated values</span>
+    <span class="c1"># and best action</span>
+    <span class="k">return</span> <span class="n">values</span><span class="p">,</span> <span class="n">best_action</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell embeds the function into a loop where the agent gathers experiences over 90 days (i.e., over 90 action-reward pairs) and we can observe how her average reward as well as her action choices develop with accumulated experience.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialize the algorithm</span>
+<span class="n">old_actions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+<span class="n">old_rewards</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+<span class="c1"># initialize some variables for logging</span>
+<span class="n">actions_log</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">rewards_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">average_rewards_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># itentify the ground truth optimal action so as to check</span>
+<span class="c1"># how often the agent would choose it</span>
+<span class="n">optimal_action</span> <span class="o">=</span> <span class="n">actions</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">true_restaurant_rewards</span><span class="p">)]</span>
+
+<span class="c1"># iterate over 90 &quot;experience steps&quot;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">90</span><span class="p">):</span>
+    <span class="c1"># run the algorithm with a GREEDY policy</span>
+    
+    <span class="c1"># return selected action according to current estimates</span>
+    <span class="n">values</span><span class="p">,</span> <span class="n">best_action</span> <span class="o">=</span> <span class="c1">### YOUR CODE HERE ###</span>
+    <span class="c1"># observe the reward for the currently estimated best action</span>
+    <span class="n">reward</span> <span class="o">=</span> <span class="n">town_environment</span><span class="p">(</span><span class="n">best_action</span><span class="p">,</span><span class="n">true_restaurant_rewards</span><span class="p">)</span>
+
+    <span class="c1"># create experience arrays</span>
+    <span class="n">old_actions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">old_actions</span><span class="p">,</span> <span class="n">best_action</span><span class="p">)</span>
+    <span class="n">old_rewards</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">old_rewards</span><span class="p">,</span> <span class="n">reward</span><span class="p">)</span>
+
+    <span class="c1"># log the results</span>
+    <span class="c1"># check if the best action is the optimal action</span>
+    <span class="n">actions_log</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">best_action</span> <span class="o">==</span> <span class="n">optimal_action</span><span class="p">)</span>
+    <span class="n">rewards_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
+    <span class="n">average_rewards_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">rewards_list</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">rewards_list</span><span class="p">))</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot results</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">actions_log</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">actions_log</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Experience steps&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Optimal action rate&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">average_rewards_list</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Experience steps&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Average reward&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NOW RUN THE SAME ALGORITHM WITH EPSILON-GREEDY POLICY</span>
+
+<span class="c1">### YOUR CODE HERE ###</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="LLMs_intro_RL.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Language Model Training &amp; Introduction to RL</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework-logistics">Homework logistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminaries">Preliminaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-20-points">Exercise 1 (20 points)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-1-5-points">Exercise 1.1 (5 points)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-2-15-points">Exercise 1.2 (15 points)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-10-points">Exercise 2 (10 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-20-points">Exercise 3 (20 points)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Polina Tsvilodub
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
