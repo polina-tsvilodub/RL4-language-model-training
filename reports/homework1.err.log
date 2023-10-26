@@ -23,7 +23,7 @@ generator = pipeline('text-generation', model='EleutherAI/gpt-neo-1.3B')
 ----- stderr -----
 Downloading (…)lve/main/config.json:   0%|          | 0.00/1.35k [00:00<?, ?B/s]
 ----- stderr -----
-Downloading (…)lve/main/config.json: 100%|██████████| 1.35k/1.35k [00:00<00:00, 341kB/s]
+Downloading (…)lve/main/config.json: 100%|██████████| 1.35k/1.35k [00:00<00:00, 302kB/s]
 ----- stderr -----
 
 ------------------
