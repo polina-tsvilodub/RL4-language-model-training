@@ -15,7 +15,10 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-generator = pipeline('text-generation', model='EleutherAI/gpt-neo-1.3B')
+generator = pipeline(
+    'text-generation', 
+    model='EleutherAI/gpt-neo-1.3B'
+)
 
 ### YOUR CODE HERE ###
 ------------------
@@ -23,7 +26,7 @@ generator = pipeline('text-generation', model='EleutherAI/gpt-neo-1.3B')
 ----- stderr -----
 Downloading (…)lve/main/config.json:   0%|          | 0.00/1.35k [00:00<?, ?B/s]
 ----- stderr -----
-Downloading (…)lve/main/config.json: 100%|██████████| 1.35k/1.35k [00:00<00:00, 302kB/s]
+Downloading (…)lve/main/config.json: 100%|██████████| 1.35k/1.35k [00:00<00:00, 409kB/s]
 ----- stderr -----
 
 ------------------
@@ -31,8 +34,11 @@ generator = pipeline('text-generation', model='EleutherAI/gpt-neo-1.3B')
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mRuntimeError[0m                              Traceback (most recent call last)
 Cell [0;32mIn[3], line 1[0m
-[0;32m----> 1[0m generator [38;5;241m=[39m [43mpipeline[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mtext-generation[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[43mmodel[49m[38;5;241;43m=[39;49m[38;5;124;43m'[39;49m[38;5;124;43mEleutherAI/gpt-neo-1.3B[39;49m[38;5;124;43m'[39;49m[43m)[49m
-[1;32m      3[0m [38;5;66;03m### YOUR CODE HERE ###[39;00m
+[0;32m----> 1[0m generator [38;5;241m=[39m [43mpipeline[49m[43m([49m
+[1;32m      2[0m [43m    [49m[38;5;124;43m'[39;49m[38;5;124;43mtext-generation[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m
+[1;32m      3[0m [43m    [49m[43mmodel[49m[38;5;241;43m=[39;49m[38;5;124;43m'[39;49m[38;5;124;43mEleutherAI/gpt-neo-1.3B[39;49m[38;5;124;43m'[39;49m
+[1;32m      4[0m [43m)[49m
+[1;32m      6[0m [38;5;66;03m### YOUR CODE HERE ###[39;00m
 
 File [0;32m/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/transformers/pipelines/__init__.py:834[0m, in [0;36mpipeline[0;34m(task, model, config, tokenizer, feature_extractor, image_processor, framework, revision, use_fast, token, device, device_map, torch_dtype, trust_remote_code, model_kwargs, pipeline_class, **kwargs)[0m
 [1;32m    832[0m [38;5;28;01mif[39;00m [38;5;28misinstance[39m(model, [38;5;28mstr[39m) [38;5;129;01mor[39;00m framework [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:

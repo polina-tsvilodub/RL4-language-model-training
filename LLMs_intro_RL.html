@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -367,7 +367,10 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformers-training-and-rl">Transformers, Training and RL</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-materials-optional">Further materials (optional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-materials-optional">Further materials (optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-materials-on-programming-for-rl-optional">Further materials on programming for RL (optional)</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
@@ -405,8 +408,25 @@ Furthermore, a conceptual motivation and a high-level introduction to reinforcem
 <li><p><a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2016/file/16026d60ff9b54410b3435b403afd226-Paper.pdf">Paper explaining potential short-comings of teacher-forcing based training and suggesting an alternative</a></p></li>
 <li><p><a class="reference external" href="https://arxiv.org/pdf/1904.09751.pdf">Classic paper introducing nucleus-sampling</a></p></li>
 <li><p><a class="reference external" href="https://www.promptingguide.ai/">Webbook on current prompting techniques</a></p></li>
-<li><p><a class="reference external" href="https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf"><strong>Sutton &amp; Barto (2018). Reinforcement learning: An Introduction.</strong></a></p></li>
+<li><p>[<strong>Sutton &amp; Barto (2018). Reinforcement learning: An Introduction.</strong>](<a class="reference external" href="https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf">https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf</a></p></li>
 </ul>
+<section id="further-materials-on-programming-for-rl-optional">
+<h3>Further materials on programming for RL (optional)<a class="headerlink" href="#further-materials-on-programming-for-rl-optional" title="Permalink to this heading">#</a></h3>
+<p>Below are some suggestions of practical materials for RL. However, note that most introductions on Youtube etc cover specific libraries or environments commonly used in RL. You are not required to get into the details of those for the course (unless you want to). We might use more specific libraries later in the course. Basic understanding of how to use libraries in general, as well as understanding of PyTorch and maybe basic deep learning in PyTorch will be sufficient.</p>
+<ul class="simple">
+<li><p>[A blog post implementing an RL environment in Python (presupposes Python familiarity)](<a class="reference external" href="https://towardsdatascience.com/hands-on-introduction-to-reinforcement-learning-in-python-da07f7aaca88">https://towardsdatascience.com/hands-on-introduction-to-reinforcement-learning-in-python-da07f7aaca88</a></p></li>
+<li><p><a class="reference external" href="https://pythonprogramming.net/q-learning-reinforcement-learning-python-tutorial/">Tutorial on Python for RL</a></p>
+<ul>
+<li><p>working with the Gym environment for all kinds of RL algorithms which also go beyond the scope of the class</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=EMXfZB8FVUA&amp;list=PLqnslRFeH2UrcDBWF5mfPGpqQDSta6VK4">Introduction to PyTorch tutorials</a></p>
+<ul>
+<li><p>basic and general (not specific to RL), but the essential PyTorch functionality will be used for our RL experiments and will help understand other more high-level libraries which will be used specifically for RL.</p></li>
+</ul>
+</li>
+</ul>
+</section>
 </section>
 <section id="homework">
 <h2>Homework<a class="headerlink" href="#homework" title="Permalink to this heading">#</a></h2>
@@ -480,7 +500,10 @@ Furthermore, a conceptual motivation and a high-level introduction to reinforcem
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformers-training-and-rl">Transformers, Training and RL</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-materials-optional">Further materials (optional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-materials-optional">Further materials (optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-materials-on-programming-for-rl-optional">Further materials on programming for RL (optional)</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
@@ -529,8 +552,8 @@ By Polina Tsvilodub
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
+  <script src="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
 
   <footer class="bd-footer">
   </footer>
