@@ -9,10 +9,10 @@ logo: logo_rl.png
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  exclude_patterns:
-    - 'homework1'
   execute_notebooks: force
   stderr_output: remove
+  exclude_patterns:
+    - 'homework1'
 
 
 # Define the name of the latex output file for PDF builds
