@@ -8,3 +8,4 @@ chapters:
 - file: LLMs_intro_RL
   sections:
     - file: homework1
+- file: RL
