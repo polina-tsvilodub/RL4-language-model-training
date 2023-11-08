@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Language Model Training &amp; Introduction to RL &#8212; Reinforcement Learning for Language Model Training</title>
+    <title>Reinforcement Learning (part 2) &#8212; Reinforcement Learning for Language Model Training</title>
   
   
   
@@ -62,11 +62,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'LLMs_intro_RL';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'RL';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Homework 1" href="homework1.html" />
-    <link rel="prev" title="Language Models: Introduction" href="LLMs.html" />
+    <link rel="prev" title="Homework 1" href="homework1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -169,11 +168,11 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="LLMs.html">Language Models: Introduction</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Language Model Training &amp; Introduction to RL</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="LLMs_intro_RL.html">Language Model Training &amp; Introduction to RL</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="homework1.html">Homework 1</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="RL.html">Reinforcement Learning (part 2)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Reinforcement Learning (part 2)</a></li>
 </ul>
 
     </div>
@@ -245,7 +244,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/polina-tsvilodub/RL4-language-model-training/issues/new?title=Issue%20on%20page%20%2FLLMs_intro_RL.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/polina-tsvilodub/RL4-language-model-training/issues/new?title=Issue%20on%20page%20%2FRL.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -275,7 +274,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/LLMs_intro_RL.md" target="_blank"
+      <li><a href="_sources/RL.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -357,7 +356,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Language Model Training & Introduction to RL</h1>
+    <h1>Reinforcement Learning (part 2)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -367,12 +366,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformers-training-and-rl">Transformers, Training and RL</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-materials-optional">Further materials (optional)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-materials-on-programming-for-rl-optional">Further materials on programming for RL (optional)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-materials-optional">Further materials (optional)</a></li>
 </ul>
             </nav>
         </div>
@@ -384,57 +378,19 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="language-model-training-introduction-to-rl">
-<h1>Language Model Training &amp; Introduction to RL<a class="headerlink" href="#language-model-training-introduction-to-rl" title="Permalink to this heading">#</a></h1>
-<p>In this session, the familiarization with the core concepts around language models is wrapped up. Training of language models is shortly discussed, so as to recap terms which are important for understanding fine-tuning of LMs with RL.
-Furthermore, a conceptual motivation and a high-level introduction to reinforcement learning (RL) is provided.</p>
-<section id="transformers-training-and-rl">
-<h2>Transformers, Training and RL<a class="headerlink" href="#transformers-training-and-rl" title="Permalink to this heading">#</a></h2>
-<p>In this session, some additional details of the transformers architecure are discussed. Then, teacher-forcing based training of language models is briefly reviewed. Important concepts around inference with trained LMs (e.g., decoding schemes, prompting) are highlighted. This concludes the basic introduction / recap of core language models.</p>
-<p>The second part of the session motivates reinforcement learning in the context of LMs and briefly situates it in the field of machine learning. Then, core concepts of RL like states, actions, policy etc. are introduced. The introduction is rather informal; the main goal is to develop some intuitions about these terms.</p>
-<p>Slides for the session can be found <a class="reference external" href="https://polina-tsvilodub.github.io/RL4-language-model-training/02a-LLMs-training-RL.pdf">here</a>.</p>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="reinforcement-learning-part-2">
+<h1>Reinforcement Learning (part 2)<a class="headerlink" href="#reinforcement-learning-part-2" title="Permalink to this heading">#</a></h1>
+<p>This session provides a deeper dive into reinforcement learning. In particular, this session introduces the formal framework which is used in RL, the Markov Decision Processes (MDPs).The session provides a brief overview of value functions which can be used to solve MDPs, and then focuses on motivating and introducing <em>policy-gradient methods</em>. These methods are commonly use when fine-tuning language models with RL.</p>
+<p>The goal of the session is to provide a more formal introduction to core concepts in RL and to introduce the technical underpinnings of methods used for fine-tuning LLMs with RL.</p>
+<p>Slides for the session can be found <a class="reference external" href="https://polina-tsvilodub.github.io/RL4-language-model-training/03a-RL.pdf">here</a>.</p>
 <section id="further-materials-optional">
 <h2>Further materials (optional)<a class="headerlink" href="#further-materials-optional" title="Permalink to this heading">#</a></h2>
 <p>Below, further materials on transformers, language model training, decoding schemes and basic RL concepts can be found.</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://arxiv.org/pdf/2104.09864.pdf">Rotatory Position Embeddings (RoPE): a popular SOTA positional encoding methods used in, e.g., LLaMA</a></p></li>
-<li><p><a class="reference external" href="https://www.youtube.com/watch?v=5vcj8kSwBCY">Great lecture by Vaswani about the Transformer architecture</a></p></li>
-<li><p><a class="reference external" href="https://huggingface.co/learn/nlp-course/chapter7/6#training-a-causal-language-model-from-scratch">NLP course chapter from HuggingFace oon how to train LMs (using their training wrappers)</a></p></li>
-<li><p><a class="reference external" href="https://www.deeplearningbook.org/">Goodfellow et al. (2016). Deep Learning</a></p>
-<ul>
-<li><p>an encyclopaedic webbook on deep learning working through general concepts related to neural networks, training, optimization etc.</p></li>
-</ul>
-</li>
-<li><p><a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2016/file/16026d60ff9b54410b3435b403afd226-Paper.pdf">Paper explaining potential short-comings of teacher-forcing based training and suggesting an alternative</a></p></li>
-<li><p><a class="reference external" href="https://arxiv.org/pdf/1904.09751.pdf">Classic paper introducing nucleus-sampling</a></p></li>
-<li><p><a class="reference external" href="https://www.promptingguide.ai/">Webbook on current prompting techniques</a></p></li>
-<li><p>[<strong>Sutton &amp; Barto (2018). Reinforcement learning: An Introduction.</strong>](<a class="reference external" href="https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf">https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf</a></p></li>
-</ul>
-<section id="further-materials-on-programming-for-rl-optional">
-<h3>Further materials on programming for RL (optional)<a class="headerlink" href="#further-materials-on-programming-for-rl-optional" title="Permalink to this heading">#</a></h3>
-<p>Below are some suggestions of practical materials for RL. However, note that most introductions on Youtube etc cover specific libraries or environments commonly used in RL. You are not required to get into the details of those for the course (unless you want to). We might use more specific libraries later in the course. Basic understanding of how to use libraries in general, as well as understanding of PyTorch and maybe basic deep learning in PyTorch will be sufficient.</p>
-<ul class="simple">
-<li><p>[A blog post implementing an RL environment in Python (presupposes Python familiarity)](<a class="reference external" href="https://towardsdatascience.com/hands-on-introduction-to-reinforcement-learning-in-python-da07f7aaca88">https://towardsdatascience.com/hands-on-introduction-to-reinforcement-learning-in-python-da07f7aaca88</a></p></li>
-<li><p><a class="reference external" href="https://pythonprogramming.net/q-learning-reinforcement-learning-python-tutorial/">Tutorial on Python for RL</a></p>
-<ul>
-<li><p>working with the Gym environment for all kinds of RL algorithms which also go beyond the scope of the class</p></li>
-</ul>
-</li>
-<li><p><a class="reference external" href="https://www.youtube.com/watch?v=EMXfZB8FVUA&amp;list=PLqnslRFeH2UrcDBWF5mfPGpqQDSta6VK4">Introduction to PyTorch tutorials</a></p>
-<ul>
-<li><p>basic and general (not specific to RL), but the essential PyTorch functionality will be used for our RL experiments and will help understand other more high-level libraries which will be used specifically for RL.</p></li>
-</ul>
-</li>
+<li><p><a class="reference external" href="https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf"><strong>Sutton &amp; Barto (2018). Reinforcement learning: An Introduction.</strong></a></p></li>
+<li><p><a class="reference external" href="https://youtu.be/2GwBez0D20A?si=D4toGoTbQu01qP5j">Great YouTube video series on RL by Pieter Abbeel</a></p></li>
 </ul>
 </section>
-</section>
-<section id="homework">
-<h2>Homework<a class="headerlink" href="#homework" title="Permalink to this heading">#</a></h2>
-<p>The first homework is out! In this homework, you will get a chance to try concepts we discussed so far hands-on. Please find the exercise sheet and all instructions on the next page.</p>
-</section>
-<div class="toctree-wrapper compound">
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -468,22 +424,13 @@ Furthermore, a conceptual motivation and a high-level introduction to reinforcem
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="LLMs.html"
+       href="homework1.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Language Models: Introduction</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="homework1.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Homework 1</p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -500,12 +447,7 @@ Furthermore, a conceptual motivation and a high-level introduction to reinforcem
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformers-training-and-rl">Transformers, Training and RL</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-materials-optional">Further materials (optional)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-materials-on-programming-for-rl-optional">Further materials on programming for RL (optional)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-materials-optional">Further materials (optional)</a></li>
 </ul>
   </nav></div>
 
