@@ -9,7 +9,7 @@ Slides for the session can be found [here](<https://polina-tsvilodub.github.io/R
 
 ## Further materials (optional)
 
-Below, further materials on transformers, language model training, decoding schemes and basic RL concepts can be found.
+Below, further materials on reinforcement learning can be found.
 
 * [**Sutton & Barto (2018). Reinforcement learning: An Introduction.**](https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf)
 * [Great YouTube video series on RL by Pieter Abbeel](https://youtu.be/2GwBez0D20A?si=D4toGoTbQu01qP5j)
