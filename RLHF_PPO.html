@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Reinforcement Learning (part 2) &#8212; Reinforcement Learning for Language Model Training</title>
+    <title>Reinforcement Learning (part 3): RLHF and PPO &#8212; Reinforcement Learning for Language Model Training</title>
   
   
   
@@ -62,10 +62,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'RL';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'RLHF_PPO';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Homework 1" href="homework1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -166,13 +165,13 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="LLMs.html">Language Models: Introduction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="LLMs_intro_RL.html">Language Model Training &amp; Introduction to RL</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="homework1.html">Homework 1</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Reinforcement Learning (part 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RL.html">Reinforcement Learning (part 2)</a></li>
 </ul>
 
     </div>
@@ -244,7 +243,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/polina-tsvilodub/RL4-language-model-training/issues/new?title=Issue%20on%20page%20%2FRL.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/polina-tsvilodub/RL4-language-model-training/issues/new?title=Issue%20on%20page%20%2FRLHF_PPO.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -274,7 +273,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/RL.md" target="_blank"
+      <li><a href="_sources/RLHF_PPO.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -356,7 +355,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Reinforcement Learning (part 2)</h1>
+    <h1>Reinforcement Learning (part 3): RLHF and PPO</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -378,16 +377,23 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="reinforcement-learning-part-2">
-<h1>Reinforcement Learning (part 2)<a class="headerlink" href="#reinforcement-learning-part-2" title="Permalink to this heading">#</a></h1>
-<p>This session provides a deeper dive into reinforcement learning. In particular, this session introduces the formal framework which is used in RL, the Markov Decision Processes (MDPs).The session provides a brief overview of value functions which can be used to solve MDPs, and then focuses on motivating and introducing <em>policy-gradient methods</em>. These methods are commonly use when fine-tuning language models with RL.</p>
-<p>The goal of the session is to provide a more formal introduction to core concepts in RL and to introduce the technical underpinnings of methods used for fine-tuning LLMs with RL.</p>
-<p>Slides for the session can be found <a class="reference external" href="https://polina-tsvilodub.github.io/RL4-language-model-training/03a-RL.pdf">here</a>.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="reinforcement-learning-part-3-rlhf-and-ppo">
+<h1>Reinforcement Learning (part 3): RLHF and PPO<a class="headerlink" href="#reinforcement-learning-part-3-rlhf-and-ppo" title="Permalink to this heading">#</a></h1>
+<p>This session consists of two parts and aims to clarify the connection between reinforcement learning and language model fine-tuning, especially as it was been employed in recent systems like ChatGPT.</p>
+<p>In particular, the first part of the session introduces the Reinforcement Learning from Human Feedback (RLHF) approach as it was used for training ChatGPT and InstructGPT. Core components of the approaches are discussed, especially focusing on the reward modeling aspect.
+The second part provides an overview of developments that were made in the domain of <em>policy-gradient methods</em> (e.g., advantage estimation, gradient variance reduction techniques etc). The session focuses on Proximal Policy Optimization (PPO), one of the most popular deep RL algorithms in the current literature.</p>
+<p>The goal of the session is to connect more closely algorithms from RL and approaches that are applied to fine-tune LLMs, as well as to outline core concepts in SOTA policy-gradient algorithms.</p>
+<p>Slides for the session can be found <a class="reference external" href="https://polina-tsvilodub.github.io/RL4-language-model-training/04a-PG-RMs.pdf">here</a>.</p>
 <section id="further-materials-optional">
 <h2>Further materials (optional)<a class="headerlink" href="#further-materials-optional" title="Permalink to this heading">#</a></h2>
-<p>Below, further materials on reinforcement learning can be found.</p>
+<p>Below, further materials on RL, algorithms discussed in the session as well as materials introducing and reviewing reward modeling from human feedback can be found.</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf"><strong>Sutton &amp; Barto (2018). Reinforcement learning: An Introduction.</strong></a></p></li>
+<li><p><a class="reference external" href="https://openai.com/blog/chatgpt">ChatGPT blogpost</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1707.06347.pdf">Schulman et al. (2017) Proximal Policy Optimization Algorithms</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/2204.05862.pdf">Bai et al. (2022) Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/2203.02155.pdf">InstructGPT (architecture underlyinh ChatGPT and Gpt-3.5): Ouyang et al. (2022) Training language models to follow instructions with human feedback</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/2307.15217.pdf">Paper including a review of methods of eliciting human feedback: Casper et al. (2023) Open Problems and Fundamental Limitations of Reinforcement Learning from Human Feedback</a></p></li>
+<li><p><a class="reference external" href="https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf">Sutton &amp; Barto (2018). Reinforcement learning: An Introduction.</a></p></li>
 <li><p><a class="reference external" href="https://youtu.be/2GwBez0D20A?si=D4toGoTbQu01qP5j">Great YouTube video series on RL by Pieter Abbeel</a></p></li>
 </ul>
 </section>
@@ -423,15 +429,6 @@ document.write(`
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="homework1.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Homework 1</p>
-      </div>
-    </a>
 </div>
                 </footer>
               
