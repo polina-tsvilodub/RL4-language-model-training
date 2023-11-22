@@ -10,3 +10,4 @@ chapters:
     - file: homework1
 - file: RL
 - file: RLHF_PPO
+- file: SOTA-models
