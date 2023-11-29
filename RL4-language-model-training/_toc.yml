@@ -11,3 +11,4 @@ chapters:
 - file: RL
 - file: RLHF_PPO
 - file: SOTA-models
+- file: Behavioral_evals
