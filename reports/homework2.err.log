@@ -1,0 +1,53 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/jupyter_core/utils/__init__.py", line 173, in wrapped
+    return loop.run_until_complete(inner)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# trainining set up
+
+device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+
+# dataset and dataloader
+policy_tokenizer.pad_token = policy_tokenizer.eos_token
+policy_tokenizer.padding_size = "left"
+reward_tokenizer.padding_side = "left"
+policy = policy.to(device)
+reward_model = reward_model.to(device)
+
+##### Hyperparameters #####
+num_epochs = 1
+batch_size = 4
+learning_rate = ### YOUR CODE HERE ####
+###########################
+
+# instantiate the dataloader
+dataset = ImdbDataset(imdb_ds['train'], policy_tokenizer)
+dataloader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)
+
+# 
+num_steps = len(dataset) // batch_size / 2
+print("Number of training steps ", num_steps)
+
+# optimizer
+optimizer = torch.optim.Adam(policy.parameters(), lr=learning_rate)
+------------------
+
+
+[0;36m  Cell [0;32mIn[10], line 15[0;36m[0m
+[0;31m    learning_rate = ### YOUR CODE HERE ####[0m
+[0m                    ^[0m
+[0;31mSyntaxError[0m[0;31m:[0m invalid syntax
+
+

@@ -1,0 +1,1195 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Homework 2 &#8212; Reinforcement Learning for Language Model Training</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'homework2';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Evaluating LLMs: Part 1" href="Behavioral_evals.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo_rl.png" class="logo__image only-light" alt="Reinforcement Learning for Language Model Training - Home"/>
+    <script>document.write(`<img src="_static/logo_rl.png" class="logo__image only-dark" alt="Reinforcement Learning for Language Model Training - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to “RL for Language Model Training”!
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="LLMs.html">Language Models: Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="LLMs_intro_RL.html">Language Model Training &amp; Introduction to RL</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="homework1.html">Homework 1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="RL.html">Reinforcement Learning (part 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RLHF_PPO.html">Reinforcement Learning (part 3): RLHF and PPO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SOTA-models.html">SOTA systems</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Behavioral_evals.html">Evaluating LLMs: Part 1</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Homework 2</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/polina-tsvilodub/RL4-language-model-training/blob/main/RL4-language-model-training/homework2.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/polina-tsvilodub/RL4-language-model-training" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/polina-tsvilodub/RL4-language-model-training/issues/new?title=Issue%20on%20page%20%2Fhomework2.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/homework2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Homework 2</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework-logistics">Homework logistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminaries">Preliminaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-10-points">Exercise 1 (10 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-25-points">Exercise 2 (25 points)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-the-trained-model">Saving the trained model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-15-points">Exercise 3 (15 points)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="homework-2">
+<h1>Homework 2<a class="headerlink" href="#homework-2" title="Permalink to this heading">#</a></h1>
+<p>The learning goals for the second hands-on sheet is to gain practical experience with the concepts we discussed throughout the recent sessions in class. In particular, the exercise will focus on:</p>
+<ul class="simple">
+<li><p>the human feedback which goes into RLHF and provide practical questions about a publich RLHF dataset which is commonly used for finetuning LLMs</p></li>
+<li><p>actually trying to finetune a small language model (GPT-2) with reinfrocement learning</p></li>
+<li><p>evaluating the fine-tuned model on common benchmark tasks.</p></li>
+</ul>
+<p>Again, the homework is intended to showcase important practical aspects, further conceptual understanding of the topics we discuss in class and provide practical tools and exercise for your own future work.
+It is <em>not</em> meant to dismay you. Therefore, even if you don’t have a lot of ML / programming / technical background, you are warmly encouraged to take on the tasks, ask questions and discuss any concerns you have (with fellow students or me). There are also some hints and links to resources throughout the tasks which may help you get information which will help solving the tasks.</p>
+<p>Some of the linked resources include, e.g., libraries or links to functions from libraries which may implement some of the tasks that are included in this homework. However, the provided started code intentionally spells out many steps “by hand” rather than using convenience functions from libraries. This is also meant to help you becom familiar with critical computation steps which might be hidden behind such libraries.</p>
+<section id="homework-logistics">
+<h2>Homework logistics<a class="headerlink" href="#homework-logistics" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>You will have two weeks to complete the assignment (<strong>until Saturday, December 16th, 6pm German time</strong>).</p></li>
+<li><p><strong>Please do and submit your homework by yourself!</strong></p></li>
+<li><p>However, you are warmly encouraged to ask questions and help each other, without posting full solutions, via active discussions in the dedicated Forum space on Moodle (“Homework 2”). Most active participants of the Forum discussions will earn some extra points for their grade!</p></li>
+<li><p>Please submit your solutions via Moodle. You will find a quiz called “Homework 2” with questions and answer fields corresponding the respective exercise numbers listed below.</p></li>
+<li><p>If you have questions or difficulties with the homework, please try to solve them with the help of your fellow students via Forum. However, don’t hesitate to reach out to me via email if you have any questions, struggle or feel overwhelmed.</p></li>
+</ul>
+</section>
+<section id="preliminaries">
+<h2>Preliminaries<a class="headerlink" href="#preliminaries" title="Permalink to this heading">#</a></h2>
+<p>The exercises below will require you to execute Python code. You can do so either on your own machine, or by using <a class="reference external" href="https://colab.research.google.com/">Google Colab</a> (free, only requires a Google account). You can easily do the latter by pressing the Colab icon at the top of the webook’s page.
+You are encouraged to use the Colab option to avoid complications with local package installations etc.
+To speed up the execution of the code on Colab (especially Exercise 2 and 3), you can use the available GPU. For that, before executing your code, navigate to Runtime &gt; Change runtime type &gt; GPU &gt; Save.</p>
+<p>However, if you do want to run the code locally on your machine, I strongly encourage you to create an environment (e.g., with Conda) before you install any dependencies, and please keep in mind that pretrained language model weights might take up quite a bit of space on your hard drive or might require high RAM for prediction.</p>
+<p>Note that the class uses PyTorch. For those of you who wish to complete final projects which include programming, you are also free to use TensorFlow for that (but I may be able to provide less support with that).</p>
+<p><strong>Exercise 2: Note on saving your model trained on Colab</strong></p>
+<p>Please note that you may want to save your fine-tuned model in exercise 2 in order to be able to re-use it later. Improtantly, sessions on Colab only persist information (including files saved to the session drive) as long as your runtime is connected. Therefore, please download your model to your local machine or mount Colab to your Google drive (see instructions in Exercise 2).</p>
+</section>
+<section id="exercise-1-10-points">
+<h2>Exercise 1 (10 points)<a class="headerlink" href="#exercise-1-10-points" title="Permalink to this heading">#</a></h2>
+<p>In this exercise, we will look at the aspect of human feedback in the RLHF pipeline which we discussed from a more theoretical perspective in course sessions.</p>
+<p>Your job for this exercise is to inspect an open-source human-feedback dataset provided by researchers from Anthropic.</p>
+<p><strong>TASK:</strong></p>
+<ol class="arabic simple">
+<li><p>Load the following dataset from Huggingface: <code class="docutils literal notranslate"><span class="pre">Anthropic/hh-rlhf</span></code> (you can choose how to access the dataset as you wish)</p></li>
+<li><p>Understand the structure of the dataset</p></li>
+<li><p>Answer questions about the dataset and some samples from it on Moodle</p></li>
+</ol>
+<p><strong>Hints and helpful materials:</strong></p>
+<ul class="simple">
+<li><p>slides from <a class="reference external" href="https://polina-tsvilodub.github.io/RL4-language-model-training/04a-PG-RMs.pdf">session 4</a> discuss human feedback in the RLHF context</p></li>
+<li><p><a class="reference external" href="https://huggingface.co/blog/rlhf">blogpost</a> on RLHF</p></li>
+</ul>
+</section>
+<section id="exercise-2-25-points">
+<h2>Exercise 2 (25 points)<a class="headerlink" href="#exercise-2-25-points" title="Permalink to this heading">#</a></h2>
+<p>In this task, we will fine-tuned our very own LM with reinforcement learning!</p>
+<p>We will use reinforcement learning to fine-tune a pretrained language model for the task of <em>positive review generation</em>. Specifically, we will fine-tune an LM for generating a positive movie review continuation based on a partial reivew provided as input. The continuation should be positive even if the input was negative. For this, we will use the <span class="xref myst">IMDB dataset</span> of movie reviews (we will only use a half of the train split to speed up training). The task is inspired by the IMDB task from <a class="reference external" href="https://arxiv.org/pdf/2210.01241.pdf">this paper</a>.
+For example, we want the fine-tuned model to do the following:</p>
+<p>Example input: “I would put this at the top of my list of films “</p>
+<p>Example model prediction we want: “which I would recoomend to all of my friends. Great movie!”</p>
+<p>For this exercise, your task is to implement a prominent policy-gradient algorithm  – REINFORCE <a class="reference external" href="https://link.springer.com/content/pdf/10.1007/BF00992696.pdf">(Williams, 1992)</a>. This was one of the first algorithms introduced in the literature in the area of policy gradient methods which preceded more advanced methods like PPO we have seen in the lecture. Versions of REINFORCE are still used today; e.g., the Sparrow model which was introduced in class was trained with REINFORCE with a baseline. Similar to other policy gradient methods, it allows us to directly learn a parameterized policy following which will maximize expected returns, without learning value functions.</p>
+<p>The REINFORCE weight update rule provides a mechanism for updating parameters of the policy in order to maximize expected returns in the following way:</p>
+<div class="math notranslate nohighlight">
+\[ \theta_{t+1} = \theta_{t} + \alpha \; R\; \nabla \log \pi(a \mid s)  \]</div>
+<p>where <span class="math notranslate nohighlight">\(\theta_{t}\)</span> are the current policy parameters, <span class="math notranslate nohighlight">\(\alpha\)</span> is a learning rate, <span class="math notranslate nohighlight">\(R\)</span> is the reward for the current episode, <span class="math notranslate nohighlight">\(\pi\)</span> the current policy and <span class="math notranslate nohighlight">\(a\)</span> is the action taken in the state <span class="math notranslate nohighlight">\(s\)</span> (for this exercise we assume a bandit environment). Sometimes, for variance reduction purposes, a reward baseline <span class="math notranslate nohighlight">\(b\)</span> is used and <span class="math notranslate nohighlight">\((R-b)\)</span> is used instead of <span class="math notranslate nohighlight">\(R\)</span>.
+Note that REINFORCE also allows us to learn the policy given rollouts under its current parameterization (i.e., we use <span class="math notranslate nohighlight">\(\log P(a \mid s)\)</span> under the current policy). In other words, we approximate the true gradient of the expected return with respect to the policy parameters via <em>sampling</em>. Since we focus on episodic tasks (i.e., sequential tasks which end when a goal state is reached; in our bandit-environment case, we only have one state, so this observation is trivial) and use returns for complete rollouts, REINFORCE is a also categorized as a Monte-Carlo algorithm (no need to worry about this if you are not familiar with them).</p>
+<p>We will use REINFORCE to fine-tune GPT-2 which already was subjected to supervised fine-tuning for predicting reviews on the IMDB dataset (available on HuggingFace): <code class="docutils literal notranslate"><span class="pre">lvwerra/gpt2-imdb</span></code></p>
+<p>As a reward function, we will use a pretrained sentiment classifier based on the DistilBERT architecture, also trained on the IMDB dataset (available on HuggingFace): <code class="docutils literal notranslate"><span class="pre">lvwerra/distilbert-imdb</span></code>.
+We assume that the classifier provides “ground truth” labels of the sentiment of IMDB reviews by providing the scores of each review being positive (1) or negative (0). For each sample, the classifier provides scores for both labels, which can then be transformed to probabilities of each label being the true one for a given sample. You can find example outputs of he classifier below.</p>
+<p>Since want our policy to predict positive reviews, we can <strong>use the scores of the <em>positive</em> label as the reward</strong> where higher scores mean more positive reviews, i.e., better performance.</p>
+<p>For your convenience, some boilerplate code is already provided below.</p>
+<p><strong>YOUR TASK</strong>:</p>
+<ol class="arabic simple">
+<li><p>familiarize yourself with the dataset, the models and the provided code</p></li>
+<li><p>implement the REINFORCE update rule by completing the code</p></li>
+<li><p>implement the reward computation with the classifier by completing the code</p></li>
+<li><p>train the model for 1 epoch (e.g., on Colab)</p></li>
+<li><p>save the trained model (instructions below)</p></li>
+<li><p>submit your code and example test outputs on Moodle</p></li>
+<li><p>answer the additional questions on Moodle</p></li>
+</ol>
+<p><strong>Hints and additional materials:</strong></p>
+<ul class="simple">
+<li><p>please note that the REINFORCE update rule provides a way to update parameters so as to <strong>maximize</strong> the reward function (which is the objective function in case of reinforcement learning). However, standard PyTorch optimizers which we use for training <em>minimize</em> the objective function. Please take this into account in your implementation of REINFORCE.</p></li>
+<li><p>you can find an example with a PyTorch implementation of using REINFORCE for a grid world navigation task <a class="reference external" href="https://medium.com/&#64;sofeikov/reinforce-algorithm-reinforcement-learning-from-scratch-in-pytorch-41fcccafa107">here</a></p></li>
+<li><p>a practical course on deep RL by HuggingFace, specifically focusing on REINFORCE <a class="reference external" href="https://huggingface.co/learn/deep-rl-course/unit4/policy-gradient#the-reinforce-algorithm-monte-carlo-reinforce">here</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># note: if you are running the code on Colab, you may need to install the HuggingFace &#39;transformers&#39; library</span>
+<span class="c1"># for that, uncomment and run the following line:</span>
+
+<span class="c1"># !pip install transformers</span>
+<span class="c1"># !pip install datasets</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import libraries</span>
+
+<span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">AutoModelForSequenceClassification</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load the IMDB dataset</span>
+<span class="n">imdb_ds</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;imdb&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>Below, you can see the structure of the dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># inspect a sample from the train split of the dataset</span>
+<span class="n">imdb_ds</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;text&#39;: &#39;I rented I AM CURIOUS-YELLOW from my video store because of all the controversy that surrounded it when it was first released in 1967. I also heard that at first it was seized by U.S. customs if it ever tried to enter this country, therefore being a fan of films considered &quot;controversial&quot; I really had to see this for myself.&lt;br /&gt;&lt;br /&gt;The plot is centered around a young Swedish drama student named Lena who wants to learn everything she can about life. In particular she wants to focus her attentions to making some sort of documentary on what the average Swede thought about certain political issues such as the Vietnam War and race issues in the United States. In between asking politicians and ordinary denizens of Stockholm about their opinions on politics, she has sex with her drama teacher, classmates, and married men.&lt;br /&gt;&lt;br /&gt;What kills me about I AM CURIOUS-YELLOW is that 40 years ago, this was considered pornographic. Really, the sex and nudity scenes are few and far between, even then it\&#39;s not shot like some cheaply made porno. While my countrymen mind find it shocking, in reality sex and nudity are a major staple in Swedish cinema. Even Ingmar Bergman, arguably their answer to good old boy John Ford, had sex scenes in his films.&lt;br /&gt;&lt;br /&gt;I do commend the filmmakers for the fact that any sex shown in the film is shown for artistic purposes rather than just to shock people and make money to be shown in pornographic theaters in America. I AM CURIOUS-YELLOW is a good film for anyone wanting to study the meat and potatoes (no pun intended) of Swedish cinema. But really, this film doesn\&#39;t have much of a plot.&#39;,
+ &#39;label&#39;: 0}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Below, we load the pretrained models and respective tokenizers that will be used to initialize the policy and the reward model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load policy model </span>
+<span class="n">policy_tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;lvwerra/gpt2-imdb&quot;</span><span class="p">)</span>
+<span class="n">policy</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;lvwerra/gpt2-imdb&quot;</span><span class="p">)</span>
+
+<span class="c1"># Load reward model </span>
+<span class="n">reward_tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;lvwerra/distilbert-imdb&quot;</span><span class="p">)</span>
+<span class="n">reward_model</span> <span class="o">=</span> <span class="n">AutoModelForSequenceClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;lvwerra/distilbert-imdb&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>Before incorporating these models in a RL pipeline, below you can check what they output and and how the response is output (espceially for the reward model):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run an example input through the policy model just to see how it works</span>
+
+<span class="n">test_txt</span> <span class="o">=</span> <span class="s2">&quot;This movie is &quot;</span>
+<span class="n">input_ids</span> <span class="o">=</span> <span class="n">policy_tokenizer</span><span class="p">(</span><span class="n">test_txt</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span><span class="p">)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">policy</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
+    <span class="o">**</span><span class="n">input_ids</span><span class="p">,</span> 
+    <span class="n">do_sample</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">temperature</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> 
+    <span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> 
+    <span class="n">return_dict_in_generate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">output_scores</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">renormalize_logits</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example prediction of the pretrained policy model: &quot;</span><span class="p">,</span> <span class="n">policy_tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">sequences</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example prediction of the pretrained policy model:  This movie is icky and boring, and is based on a story of a guy who&#39;s been
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run an example from the IMDB train split to see how the reward model works</span>
+
+<span class="n">input_reward</span> <span class="o">=</span> <span class="n">reward_tokenizer</span><span class="p">(</span><span class="n">imdb_ds</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;text&#39;</span><span class="p">],</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span><span class="p">)</span>
+<span class="n">out_reward</span> <span class="o">=</span> <span class="n">reward_model</span><span class="p">(</span><span class="o">**</span><span class="n">input_reward</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Raw output format of the reward model: &quot;</span><span class="p">,</span> <span class="n">out_reward</span><span class="p">)</span>
+<span class="c1"># transform logits to probabilities</span>
+<span class="n">reward</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">out_reward</span><span class="o">.</span><span class="n">logits</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span> <span class="c1"># reward at index 1 is the probability of being positive; i.e., this can be used as the training reward</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Raw output format of the reward model:  SequenceClassifierOutput(loss=None, logits=tensor([[ 0.4397, -0.7132]], grad_fn=&lt;AddmmBackward0&gt;), hidden_states=None, attentions=None)
+tensor([[0.7600, 0.2400]], grad_fn=&lt;SoftmaxBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Below, a dataset is defined for convenient preprocessing and loading of IMDB texts.
+In particular, since we want to train a system to predict review continuations given partial reviews as inputs, we do not need the full reviews supplied in the IMDB dataset. The dataloader below only uses the first 64 tokens for all reviews and returns these as input for our training.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ImdbDataset</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wrapper for the IMDB dataset which returns the tokenized text</span>
+<span class="sd">    and truncates / pads to a maximum length of 64 tokens.</span>
+<span class="sd">    This is done following the paper referenced above where the input review</span>
+<span class="sd">    snippets were maximally 64 tokens and then the review had to be completed</span>
+<span class="sd">    with a positive sentiment.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">policy_tokenizer</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">policy_tokenizer</span>
+        <span class="c1"># following the paper referenced above, input texts are &lt;= 64 tokens</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_len</span> <span class="o">=</span> <span class="mi">64</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="c1"># get the text from the dataset</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
+        <span class="c1"># tokenize the text</span>
+        <span class="c1"># and manually prepend BOS token (GPT-2 tokenizer doesn&#39;t do it somehow)</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="p">(</span>
+            <span class="s2">&quot;&lt;|endoftext|&gt;&quot;</span> <span class="o">+</span> <span class="n">text</span><span class="p">,</span> 
+            <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+            <span class="n">max_length</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_len</span><span class="p">,</span> 
+            <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;max_length&#39;</span><span class="p">,</span>
+            <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span>
+          <span class="p">)</span>
+        <span class="c1"># return the tokens and the attention mask</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;input_ids&#39;</span><span class="p">:</span> <span class="n">tokens</span><span class="o">.</span><span class="n">input_ids</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">),</span> 
+            <span class="s1">&#39;attention_mask&#39;</span><span class="p">:</span> <span class="n">tokens</span><span class="o">.</span><span class="n">attention_mask</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+          <span class="p">}</span>
+    
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Below, we define a helper function wrapping around our reward model which will be used during RL training in order to score the generations of the policy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reward modeling function</span>
+
+<span class="k">def</span> <span class="nf">compute_reward</span><span class="p">(</span>
+    <span class="n">reward_model</span><span class="p">,</span> 
+    <span class="n">reward_tokenizer</span><span class="p">,</span> 
+    <span class="n">sample</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes the reward, formalized as the probability of a sample being positive. </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    reward_model: AutoModelForSequenceClassification</span>
+<span class="sd">        The pretrained sentiment classifier to use for computing the reward.</span>
+<span class="sd">    reward_tokenizer: AutoTokenizer</span>
+<span class="sd">        The tokenizer to use for the reward model.</span>
+<span class="sd">    sample: list[str]</span>
+<span class="sd">        List of reviews generated by the policy of length batch_size.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    reward: torch.Tensor</span>
+<span class="sd">        Tensor of rewards of shape (batch_size,)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># tokenize the sample</span>
+    <span class="n">input_ids</span> <span class="o">=</span> <span class="n">reward_tokenizer</span><span class="p">(</span>
+        <span class="n">sample</span><span class="p">,</span> 
+        <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+        <span class="n">max_length</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> 
+        <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;max_length&#39;</span><span class="p">,</span>
+        <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span>
+    <span class="p">)</span>
+    <span class="n">input_ids</span> <span class="o">=</span> <span class="n">input_ids</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="c1"># get the reward model prediction </span>
+    <span class="c1">### YOUR CODE HERE</span>
+
+    <span class="c1"># transform logits to probabilities, use these are reward</span>
+    <span class="c1">### YOUR CODE HERE</span>
+
+    <span class="c1"># return the reward</span>
+    <span class="k">return</span> <span class="n">reward</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Below, we define the main training loop. Next to defining the hyperparameters and the iteration over the training data, the REINFORCE update which is used as the training signal should be implemented here.</p>
+<p><strong>Hint:</strong> When you first implement and test your REINFORCE implementation, you do not need to test on the entire training dataset. Test your code on a small number of training steps, print intermediate steps etc in order to sanity-check the implementation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># trainining set up</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+
+<span class="c1"># dataset and dataloader</span>
+<span class="n">policy_tokenizer</span><span class="o">.</span><span class="n">pad_token</span> <span class="o">=</span> <span class="n">policy_tokenizer</span><span class="o">.</span><span class="n">eos_token</span>
+<span class="n">policy_tokenizer</span><span class="o">.</span><span class="n">padding_size</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span>
+<span class="n">reward_tokenizer</span><span class="o">.</span><span class="n">padding_side</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span>
+<span class="n">policy</span> <span class="o">=</span> <span class="n">policy</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">reward_model</span> <span class="o">=</span> <span class="n">reward_model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="c1">##### Hyperparameters #####</span>
+<span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="c1">### YOUR CODE HERE ####</span>
+<span class="c1">###########################</span>
+
+<span class="c1"># instantiate the dataloader</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ImdbDataset</span><span class="p">(</span><span class="n">imdb_ds</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">],</span> <span class="n">policy_tokenizer</span><span class="p">)</span>
+<span class="n">dataloader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># </span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">//</span> <span class="n">batch_size</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of training steps &quot;</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">)</span>
+
+<span class="c1"># optimizer</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">policy</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">15</span>
+    <span class="n">learning_rate</span> <span class="o">=</span> <span class="c1">### YOUR CODE HERE ####</span>
+                    <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># trainining set up</span>
+
+<span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">rewards_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># training loop</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">step</span><span class="p">,</span> <span class="n">batch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
+        
+        
+        <span class="n">out</span> <span class="o">=</span> <span class="n">policy</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
+            <span class="o">**</span><span class="n">batch</span><span class="p">,</span>
+            <span class="c1"># do_sample=True,</span>
+            <span class="n">temperature</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+            <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span>
+            <span class="n">return_dict_in_generate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">output_scores</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span> 
+        <span class="c1"># decode predictions for the reward model</span>
+        <span class="n">out_decoded</span> <span class="o">=</span> <span class="n">policy_tokenizer</span><span class="o">.</span><span class="n">batch_decode</span><span class="p">(</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">sequences</span><span class="p">,</span>
+            <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="c1"># print the current sequence every 10 steps</span>
+        <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+          <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;current sequence: &quot;</span><span class="p">,</span> <span class="n">out_decoded</span><span class="p">)</span>
+
+        <span class="c1"># below, the log probs of the generated sequences are retrieved</span>
+        <span class="n">out_scores</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">scores</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+        <span class="n">log_probs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="n">out_scores</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># reshape the tensor to shape shape (batch_size, sequence_size, vocab_size)</span>
+        <span class="n">log_probs</span> <span class="o">=</span> <span class="n">log_probs</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># get log probs for generated tokens only</span>
+        <span class="n">sequence_ids</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">sequences</span><span class="p">[:,</span> <span class="n">batch</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:]</span>
+        <span class="n">log_probs_continuations_tokens</span> <span class="o">=</span> <span class="n">log_probs</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+            <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> 
+            <span class="n">index</span><span class="o">=</span><span class="n">sequence_ids</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+        
+        <span class="c1"># compute log probability of the sequence based on the token log probs</span>
+        <span class="c1">#### YOUR CODE HERE #####</span>
+        <span class="n">log_probs_continuations_sentences</span> <span class="o">=</span> 
+        <span class="c1"># compute the reward with the helper function defined above</span>
+        <span class="c1">#### YOUR CODE HERE #####</span>
+        <span class="n">rewards</span> <span class="o">=</span> 
+        
+        <span class="n">rewards_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rewards</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">())</span>
+        <span class="c1"># compute the loss</span>
+        <span class="c1">#### REINFORCE implementation (i.e., implementation of the relevant parts of the formula above here) ####</span>
+        <span class="c1">#### YOUR CODE HERE ######</span>
+        <span class="n">loss</span> <span class="o">=</span> 
+        <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">())</span>
+        <span class="c1"># compute the gradients</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="c1"># update the parameters</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="c1"># zero the gradients</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="c1"># print the loss</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Epoch: </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s1">, Step: </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s1">, Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="saving-the-trained-model">
+<h3>Saving the trained model<a class="headerlink" href="#saving-the-trained-model" title="Permalink to this heading">#</a></h3>
+<p>We will use the trained model in the next erxercise; therefore, it should be save if you want to re-use it for exercise 3 at a later point. You can save the model to your Google Drive, if you are working on Colab, or locally.</p>
+<p>When you execute the following cell, you will be prompted to authorize Colab to access your Drive (this is a prerequisite for using this functionality, unfortunately). Please follow the displayed instructions and then execute the following code cells. Once executed, please double-check that you Drive now indeed contains your model, so as to not loose your work.</p>
+<p>Alternatively, if you do not wish to have Colab access your Drive, you can just manually download your model. To do so, please skip the next two cells, and just execute the saving cell after. Then, navigate to the directory symbol on the left panel of Colab, right-click on the new model directory and download it. If you work on a local machine, also just execute this local saving code cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># FOR GOOGLE DRIVE &amp; COLAB USE ONLY</span>
+<span class="c1"># mount Colab to Drive</span>
+<span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># FOR GOOGLE DRIVE &amp; COLAB USE ONLY</span>
+
+<span class="c1"># do not execute this if you don&#39;t want to save to Drive</span>
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+
+<span class="n">policy</span><span class="o">.</span><span class="n">save_pretrained</span><span class="p">(</span><span class="s1">&#39;/content/drive/My Drive/gpt2_imdb_policy&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># FOR LOCAL SAVING (TO COLAB SESSION OR YOUR MACHINE)</span>
+<span class="n">policy</span><span class="o">.</span><span class="n">save_pretrained</span><span class="p">(</span><span class="s1">&#39;gpt2_imdb_policy&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Below, we inspect the training dynamics.
+Please answer the respective questions about the plots on Moodle.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the fine-tuning loss</span>
+<span class="c1">### YOUR CODE HERE #####</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute average batch rewards (i.e., average reward per training step)</span>
+<span class="c1">##### YOUR CODE HERE #####</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="exercise-3-15-points">
+<h2>Exercise 3 (15 points)<a class="headerlink" href="#exercise-3-15-points" title="Permalink to this heading">#</a></h2>
+<p>Finally, we will get our hands dirty with evaluating LLMs which already have been trained. In this task, we will use a few tasks from one of the most-used LM benchmarks, the <a class="reference external" href="https://super.gluebenchmark.com/">SuperGLUE benchmark</a>:</p>
+<ul class="simple">
+<li><p>a natural language inference (NLI) task “rte”,</p>
+<ul>
+<li><p>a task wherein the model has to predict whether a second sentence is entailed by the first one (i.e., predict the label ‘entailment’ or ‘no entailment’)</p></li>
+</ul>
+</li>
+<li><p>a question answering task “boolq”,</p>
+<ul>
+<li><p>a task wherein the model has to predict an answer (yes/no) to a question, given context</p></li>
+</ul>
+</li>
+<li><p>and a sentence continuation task “copa”.</p>
+<ul>
+<li><p>a task wherein the model has to select one of two sentences as the more plausible continuation given an input sentence.</p></li>
+</ul>
+</li>
+</ul>
+<p>We will be using (subset of) the validation splits of the tasks for our evaluation.</p>
+<p>With the introduction of first language models like BERT, a common approach to using benchmarks like SuperGLUE was to fine-tune the pretrained model on the train split of the benchmark datasets, and then use the test splits for evaluation.
+With SOTA LLMs, it is more common to do zero- or few-shot evaluation where the model has to, e.g., predict labels or select answer options without special fine-tuning, just given instructions.</p>
+<p>We are also not going to fine-tune our model on these specific tasks. Instead, as introduced in class, we are going to compare the log probabilities of different answer options (e.g., log probabilities of “entailment” vs. “no entailment” following a pair of sentences from the RTE-task). With this method, the assumption is that a model’s output prediction for a particular trial is correct iff:
+$<span class="math notranslate nohighlight">\(\log P_{LM}(\text{&lt;correct label&gt; | context}) &gt; \log P_{LM}(\text{&lt;incorrect label&gt; | context}) \)</span>$</p>
+<p>For tasks like “copa” where there is no single label but instead a sentence continuation, we are going to compute the average token log probability as a single-number representation of the continuation. Here, the model’s prediction will count as correct iff the average log probability of the correct continuation sentence will be higher, given the input, than for the incorrect continuation.
+We will not using task instructions in our evaluation since the model wasn’t fine-tuned on instruction-following.</p>
+<p>Your job is to complete the code below, <em>evaluate the model which you have fine-tuned above</em> and summarize the results you find in a few words (see below for more detailed step-by-step instructions). If you have issues with the previous task and cannot use your own fine-tuned model, please use the initial IMDB fine-tuned GPT-2 with which we initialized the policy in exercise 2. Please indicate which model you are testing on Moodle in the respective exercise responses.</p>
+<p><strong>TASK:</strong></p>
+<ol class="arabic simple">
+<li><p>Download the data for the three tasks by uncommenting and executing the first code cell below, or by navigating to <a class="reference external" href="https://github.com/polina-tsvilodub/RL4-language-model-training/blob/main/RL4-language-model-training/data/homework2.zip">the repository</a> and downloading the file and unzipping it.</p></li>
+<li><p>Familiarize yourself with the code and briefly familiarize yourself with the selected tasks of the benchmark (more detailed information about the tasks can be found in the <a class="reference external" href="https://w4ngatang.github.io/static/papers/superglue.pdf">paper</a> or just on the internet, e.g., <a class="reference external" href="https://medium.com/nlplanet/two-minutes-nlp-superglue-tasks-and-2022-leaderboard-492d8c849ed">here</a>).</p></li>
+<li><p>Complete the code which tests the model on the benchmarks (helper for retrieveing log probability of labels is provided).</p></li>
+<li><p>Submit your completion of the code on Moodle.</p></li>
+<li><p>Submit your results on Moodle.</p></li>
+<li><p>Answer some questions about the task on Moodle.</p></li>
+</ol>
+<p><strong>Hints and useful materials:</strong></p>
+<ul class="simple">
+<li><p>Note that for some of the tasks we actually pass two sentences as the context, which is then followed by the task labels. Make sure to pass both sentences, where required.</p></li>
+<li><p>An example evaluation on SuperGLUE can be viewed here. Note, however,</p></li>
+<li><p>An example paper comparing (negative) log probabilities of sequences under language model (i.e., using a similar metric) can be found <a class="reference external" href="https://aclanthology.org/2021.acl-long.76.pdf">here</a>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># !wget https://github.com/polina-tsvilodub/RL4-language-model-training/blob/main/RL4-language-model-training/data/homework2.zip</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># !unzip homework2.zip</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you experience issues with the download and/or unzupping when using wget, please download the zip file manually, upload it to Colab and then execute the unzipping step.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;lvwerra/gpt2-imdb&quot;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;gpt2_imdb_policy&#39;</span><span class="p">)</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_log_prob_of_completion</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">,</span>
+        <span class="n">tokenizer</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="p">,</span>
+        <span class="n">completion</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convenience function for computing the log probability of a completion</span>
+<span class="sd">        given a prompt. This is used to compute the log probability of the</span>
+<span class="sd">        correct and incorrent labels given different trials for the different</span>
+<span class="sd">        SuperGLUE tasks.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># tokenize the prompt and the completion separately</span>
+        <span class="c1"># so as to access the logits for the completion only</span>
+        <span class="c1"># when scoring the completion</span>
+        <span class="n">input_ids_completion</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span> 
+                <span class="n">completion</span><span class="p">,</span>
+                <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span>
+        <span class="p">)[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>  
+        <span class="c1"># truncate so as to fit into to maximal context window of gpt-2</span>
+        <span class="c1"># which is 1024 tokens</span>
+        <span class="n">input_ids_prompt</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span> 
+                <span class="n">prompt</span><span class="p">,</span>
+                <span class="n">return_tensors</span><span class="o">=</span><span class="s1">&#39;pt&#39;</span><span class="p">,</span>
+                <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">max_length</span><span class="o">=</span><span class="mi">1024</span><span class="o">-</span><span class="n">input_ids_completion</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">)[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> 
+        <span class="c1"># putting together the prompt and completion</span>
+        <span class="n">input_ids</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">input_ids_prompt</span><span class="p">,</span> <span class="n">input_ids_completion</span><span class="p">),</span>
+                <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span>
+        <span class="p">)</span>
+        <span class="c1"># create attention mask and position ids</span>
+        <span class="n">attention_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">input_ids</span> <span class="o">!=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">eos_token_id</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+        <span class="n">position_ids</span> <span class="o">=</span> <span class="n">attention_mask</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+        <span class="c1"># get the logits for the completion</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span>
+                        <span class="n">input_ids</span><span class="o">=</span><span class="n">input_ids</span><span class="p">,</span>
+                        <span class="n">attention_mask</span><span class="o">=</span><span class="n">attention_mask</span><span class="p">,</span>
+                        <span class="n">position_ids</span><span class="o">=</span><span class="n">position_ids</span>
+                <span class="p">)</span>
+
+        <span class="c1"># get the logits of the completion</span>
+        <span class="c1"># for that, make a tensor of the logits</span>
+        <span class="c1"># for the completion only</span>
+        <span class="c1"># in particular, we shift the indices by one to the left to access logits of the </span>
+        <span class="c1"># actual sequence tokens</span>
+        <span class="n">logits_completion</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">logits</span><span class="p">[:,</span> <span class="p">(</span><span class="n">input_ids_prompt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">logits_completion</span> <span class="o">=</span> <span class="n">logits_completion</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+        <span class="c1"># get the log probabilities for the completion</span>
+        <span class="n">log_probs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span>
+                <span class="n">logits_completion</span><span class="p">,</span>
+                <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span>
+        <span class="p">)</span>
+        <span class="c1"># retrieve the logit corresponding to the actual completion tokens</span>
+        <span class="k">try</span><span class="p">:</span>
+                <span class="n">log_completion_tokens</span> <span class="o">=</span> <span class="n">log_probs</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+                        <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> 
+                        <span class="n">index</span><span class="o">=</span><span class="n">input_ids_completion</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+                <span class="n">log_completion_tokens</span> <span class="o">=</span> <span class="n">log_probs</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+                        <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> 
+                        <span class="n">index</span><span class="o">=</span><span class="n">input_ids_completion</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="p">)</span>
+        <span class="n">completion_log_prob</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>
+                <span class="n">log_completion_tokens</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+        
+        <span class="k">return</span> <span class="n">completion_log_prob</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># iterate over the tasks</span>
+
+<span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;copa&quot;</span><span class="p">,</span> <span class="s2">&quot;rte&quot;</span><span class="p">,</span> <span class="s2">&quot;boolq&quot;</span><span class="p">]</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;--- evaluating on task </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2"> ---&quot;</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;homework2/super_glue_formatted_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">.csv&quot;</span>
+    <span class="c1"># read the task data</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="c1"># iterate over the trials</span>
+    <span class="c1"># note that for the BoolQ and RTE tasks, the input</span>
+    <span class="c1"># prompt actually consists of two sentences, and the continuation</span>
+    <span class="c1"># is each of the labels</span>
+    <span class="c1"># therefore, we need to pass both sentences as the input prompt</span>
+    <span class="c1"># to the evaluation</span>
+    
+    <span class="c1">#### YOUR CODE HERE #####</span>
+    <span class="n">prompt</span> <span class="o">=</span> 
+    
+    <span class="c1"># compute the log probabilities for the correct and incorrect answers</span>
+    <span class="c1"># for each trial in each task</span>
+    <span class="c1">##### YOUR CODE HERE #####</span>
+    <span class="n">get_log_prob_of_completion</span><span class="p">(</span>
+        <span class="c1">#### YOUR CODE HERE #####</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># evaluate resulting log probabilities</span>
+    <span class="c1"># i.e., compute whether the log probability of the correct answer</span>
+    <span class="c1"># is higher than the log probability of the incorrect answer</span>
+    <span class="c1">#### YOUR CODE HERE #####</span>
+
+    <span class="c1"># track results so that you can compute average test accuracy</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="c1">#### YOUR CODE HERE #####)</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute the average accuracy by task </span>
+<span class="c1"># #### YOUR CODE HERE #####</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Behavioral_evals.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Evaluating LLMs: Part 1</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework-logistics">Homework logistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminaries">Preliminaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-10-points">Exercise 1 (10 points)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-25-points">Exercise 2 (25 points)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-the-trained-model">Saving the trained model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-15-points">Exercise 3 (15 points)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Polina Tsvilodub
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
