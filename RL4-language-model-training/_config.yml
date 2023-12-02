@@ -13,6 +13,7 @@ execute:
   stderr_output: remove
   exclude_patterns:
     - 'homework1'
+    - 'homework2'
 
 
 # Define the name of the latex output file for PDF builds
