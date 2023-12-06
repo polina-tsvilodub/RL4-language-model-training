@@ -14,3 +14,4 @@ chapters:
 - file: Behavioral_evals
   sections:
       - file: homework2
+- file: Unblackboxing_evals
