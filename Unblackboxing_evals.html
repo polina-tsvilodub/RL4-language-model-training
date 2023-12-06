@@ -7,8 +7,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; Reinforcement Learning for Language Model Training</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Evaluating LLMs: Part 2 &#8212; Reinforcement Learning for Language Model Training</title>
   
   
   
@@ -61,9 +62,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
-    <link rel="index" title="Index" href="#" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unblackboxing_evals';</script>
+    <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Homework 2" href="homework2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -165,7 +167,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="LLMs.html">Language Models: Introduction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="LLMs_intro_RL.html">Language Model Training &amp; Introduction to RL</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="homework1.html">Homework 1</a></li>
@@ -178,7 +180,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="homework2.html">Homework 2</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Unblackboxing_evals.html">Evaluating LLMs: Part 2</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Evaluating LLMs: Part 2</a></li>
 </ul>
 
     </div>
@@ -250,7 +252,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/polina-tsvilodub/RL4-language-model-training/issues/new?title=Issue%20on%20page%20%2Fgenindex.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/polina-tsvilodub/RL4-language-model-training/issues/new?title=Issue%20on%20page%20%2FUnblackboxing_evals.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -262,6 +264,54 @@ const thebe_selector_output = ".output, .cell_output"
   </span>
 <span class="btn__text-container">Open issue</span>
 </a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Unblackboxing_evals.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
 </li>
       
   </ul>
@@ -303,7 +353,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -314,11 +366,19 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1></h1>
+    <h1>Evaluating LLMs: Part 2</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#student-presentations">Student presentations</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -328,13 +388,43 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
+  <section class="tex2jax_ignore mathjax_ignore" id="evaluating-llms-part-2">
+<h1>Evaluating LLMs: Part 2<a class="headerlink" href="#evaluating-llms-part-2" title="Permalink to this heading">#</a></h1>
+<p>In this session, we look at more advanced approaches to understanding trained LLMs – we will discuss methods which focus on evaluating representations and certain mechanisms in the models, with the goal of understanding their role for models’ predictions. More broadly, the goal of such methods is often both better understanding what matters for building performant models, and better understanding how exactly LLMs arrive at their predictions. The latter aspect is also reffered to as (mehcanistic) <em>interpretability</em> of models.</p>
+<p>The learning goals for this session are:</p>
+<ul class="simple">
+<li><p>gain a high-level understanding why and how LLMs’ representations are evaluated,</p></li>
+<li><p>gain a high-level understanding of model evaluations via <em>interventions</em>,</p></li>
+<li><p>understand additional evaluation dimensions which matter for RL fine-tuned models (e.g., evaluating reward models).</p></li>
+</ul>
+<p>In particular, the first part of the session introduces methods which have been commonly applied to “classical” LMs. Embedding evaluation methods have been heavily applied to word embeddings like GloVe or word2vec. However, modern LLMs do not use such pretrained word-level embeddings but rather subword token representations; methods for extraction of comparable information and similar analyses of LLMs are an active area of research. Furthermore, both embedding and probing analyses focus on “core LLMs”. It remains an open question how fine-tuning affects the functional role of different mechanisms, especially in later model layers which are mostly used during fine-tuning.</p>
+<p>The slides for the session can be found <a class="reference external" href="https://polina-tsvilodub.github.io/RL4-language-model-training/07a-Mechanistic-evals.pdf">here</a>.</p>
+<section id="student-presentations">
+<h2>Student presentations<a class="headerlink" href="#student-presentations" title="Permalink to this heading">#</a></h2>
+<p>One approach to <em>mechanistic interpretability of LLMs in the context of relational tasks</em>, showcased by <a class="reference external" href="https://arxiv.org/pdf/2305.16130.pdf">Merullo, Eickhoff and Pavlick (2023)</a> will be discussed in a student presentation.</p>
+<p>When evaluating the quality of systems which utilize fine-tuning with an additional model – the <em>reward model</em> – it is critical to scrutinize all components of the system. One phenomenon that can be observed for the reward model is <em>reward collapse</em>, identified by <a class="reference external" href="https://arxiv.org/pdf/2305.17608.pdf">Song et al. (2023)</a> will also be discussed in a student presentation.</p>
+</section>
+</section>
 
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
-</div>
-
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -346,12 +436,35 @@ document.write(`
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="homework2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Homework 2</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#student-presentations">Student presentations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
