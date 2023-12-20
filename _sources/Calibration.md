@@ -7,9 +7,7 @@ In the second part we will switch gears and consider possible aspects that matte
 The learning goals for this session are:
 
 * understanding of the concept of calibration and the methodology used for assessing it,
-* gain a high-level understanding of different components of the LLM which could be evaluated with an eye towards calibration,
-* think about how to evaluate RL-trained agents,
-* understand the difference between outcome- and process-superviesd RMs.
+* gain a high-level understanding of different components of the LLM which could be evaluated with an eye towards calibration.
 
 The slides for the session can be found [here](<https://polina-tsvilodub.github.io/RL4-language-model-training/08a-Advanced-evals.pdf>).
 
@@ -20,4 +18,3 @@ One core paper about LLM calibration by [Kadavath et al., (2023)](https://arxiv.
 ## Further paper discussed in the lecture
 
 * [Giullianelli et al. (2023). What Comes Next? Evaluating Uncertainty in Neural Text Generators Against Human Production Variability](https://arxiv.org/pdf/2305.11707.pdf)
-* [Lightman et al. (2023). Let's Verify Step by Step](https://cdn.openai.com/improving-mathematical-reasoning-with-process-supervision/Lets_Verify_Step_by_Step.pdf)
