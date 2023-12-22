@@ -21,10 +21,13 @@ device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cp
 
 # dataset and dataloader
 policy_tokenizer.pad_token = policy_tokenizer.eos_token
-policy_tokenizer.padding_size = "left"
+policy_tokenizer.padding_side = "left"
 reward_tokenizer.padding_side = "left"
-policy = policy.to(device)
-reward_model = reward_model.to(device)
+policy.config.pad_token_id = policy_tokenizer.eos_token_id
+policy.generation_config.pad_token_id = policy_tokenizer.eos_token_id
+
+policy = policy.to(dtype=torch.bfloat16).to(device)
+reward_model = reward_model.to(dtype=torch.bfloat16).to(device)
 
 ##### Hyperparameters #####
 num_epochs = 1
@@ -45,7 +48,7 @@ optimizer = torch.optim.Adam(policy.parameters(), lr=learning_rate)
 ------------------
 
 
-[0;36m  Cell [0;32mIn[10], line 15[0;36m[0m
+[0;36m  Cell [0;32mIn[10], line 18[0;36m[0m
 [0;31m    learning_rate = ### YOUR CODE HERE ####[0m
 [0m                    ^[0m
 [0;31mSyntaxError[0m[0;31m:[0m invalid syntax
