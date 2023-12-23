@@ -610,7 +610,7 @@ We assume that the classifier provides “ground truth” labels of the sentimen
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example prediction of the pretrained policy model:  This movie is iced full of crap, and I can&#39;t help but feel sorry for fans who
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example prediction of the pretrained policy model:  This movie is *********** about a drug-dealer that goes from being a child to a
 </pre></div>
 </div>
 </div>
@@ -788,7 +788,7 @@ In particular, since we want to train a system to predict review continuations g
     <span class="p">]</span>
 <span class="p">)</span>
 <span class="c1"># instantiate stopping criterion</span>
-<span class="n">stopping_criteria</span> <span class="o">=</span> <span class="n">StoppingCriteriaList</span><span class="p">([</span><span class="n">MaxLengthCriteria</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">48</span><span class="p">)])</span>
+<span class="n">stopping_criteria</span> <span class="o">=</span> <span class="n">StoppingCriteriaList</span><span class="p">([</span><span class="n">MaxLengthCriteria</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">112</span><span class="p">)])</span>
 </pre></div>
 </div>
 </div>
