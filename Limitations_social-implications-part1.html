@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Evaluating LLMs: Part 3 &#8212; Reinforcement Learning for Language Model Training</title>
+    <title>Limitations &amp; Implications of LLMs: Part 1 &#8212; Reinforcement Learning for Language Model Training</title>
   
   
   
@@ -62,11 +62,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Calibration';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Limitations_social-implications-part1';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="RL fine-tuning: Outlook" href="Evaluation-RL-review.html" />
-    <link rel="prev" title="Evaluating LLMs: Part 2" href="Unblackboxing_evals.html" />
+    <link rel="prev" title="RL fine-tuning: Outlook" href="Evaluation-RL-review.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -190,9 +189,9 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Unblackboxing_evals.html">Evaluating LLMs: Part 2</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Evaluating LLMs: Part 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Calibration.html">Evaluating LLMs: Part 3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Evaluation-RL-review.html">RL fine-tuning: Outlook</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Limitations_social-implications-part1.html">Limitations &amp; Implications of LLMs: Part 1</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Limitations &amp; Implications of LLMs: Part 1</a></li>
 </ul>
 
     </div>
@@ -264,7 +263,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/polina-tsvilodub/RL4-language-model-training/issues/new?title=Issue%20on%20page%20%2FCalibration.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/polina-tsvilodub/RL4-language-model-training/issues/new?title=Issue%20on%20page%20%2FLimitations_social-implications-part1.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -294,7 +293,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/Calibration.md" target="_blank"
+      <li><a href="_sources/Limitations_social-implications-part1.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -378,7 +377,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Evaluating LLMs: Part 3</h1>
+    <h1>Limitations & Implications of LLMs: Part 1</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -389,7 +388,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#student-presentations">Student presentations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-paper-discussed-in-the-lecture">Further paper discussed in the lecture</a></li>
 </ul>
             </nav>
         </div>
@@ -401,24 +399,16 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="evaluating-llms-part-3">
-<h1>Evaluating LLMs: Part 3<a class="headerlink" href="#evaluating-llms-part-3" title="Permalink to this heading">#</a></h1>
-<p>In this session, we look at further aspects that are important when evaluating trained LLMs and when evaluating systems trained with RL. In particular, in the first part of the session we will look at <em>calibration</em>, a concept describing how close predictions about probabilities of outcomes (e.g., the retrieved token probability) of the LLM match some ‘true’ probability of an outcome (e.g., empirical frequency of those tokens). Calibration investigations are used to assess whether LLMs’ prediction confidence is plausible.</p>
-<p>In the second part we will switch gears and consider possible aspects that matter when evaluating agents that were trained with RL. In particular, we will look at unintentional shortcomings of reward modeling which result in outcomes which elicit high reward and yet would not be judged as good outcomes by humans (e.g., solutions to mathematical problems which are correct but were computed incorrectly), and how this could potentially be alleviated. This topic will be briefly situated in light of the notion of <em>alignment</em> of artificial agents and human values.</p>
-<p>The learning goals for this session are:</p>
-<ul class="simple">
-<li><p>understanding of the concept of calibration and the methodology used for assessing it,</p></li>
-<li><p>gain a high-level understanding of different components of the LLM which could be evaluated with an eye towards calibration.</p></li>
-</ul>
-<p>The slides for the session can be found <a class="reference external" href="https://polina-tsvilodub.github.io/RL4-language-model-training/08a-Advanced-evals.pdf">here</a>.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="limitations-implications-of-llms-part-1">
+<h1>Limitations &amp; Implications of LLMs: Part 1<a class="headerlink" href="#limitations-implications-of-llms-part-1" title="Permalink to this heading">#</a></h1>
+<p>In this a next sessions, we will focus more on potential limitations of LLMs and technology around them. Furthermore, we will start discussing important social implications and aspects that need to be considered when ML systems like LLMs are embedded in user-facing “real-world” applications. Some current work on assessing the limitations of LLMs as well as their social implications awill be presented by students.</p>
+<p>The slides for the session can be found <a class="reference external" href="https://polina-tsvilodub.github.io/RL4-language-model-training/10a-Social-implications.pdf">here</a>.</p>
 <section id="student-presentations">
 <h2>Student presentations<a class="headerlink" href="#student-presentations" title="Permalink to this heading">#</a></h2>
-<p>One core paper about LLM calibration by <a class="reference external" href="https://arxiv.org/pdf/2207.05221.pdf">Kadavath et al., (2023)</a> will be discussed in a student presentation.</p>
-</section>
-<section id="further-paper-discussed-in-the-lecture">
-<h2>Further paper discussed in the lecture<a class="headerlink" href="#further-paper-discussed-in-the-lecture" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://arxiv.org/pdf/2305.11707.pdf">Giullianelli et al. (2023). What Comes Next? Evaluating Uncertainty in Neural Text Generators Against Human Production Variability</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/2309.13638.pdf">McCoy et al. (2023). Embers of Autoregression: Understanding Large Language Models Through the Problem They are Trained to Solve</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/2008.02275.pdf">Hendrycks et al. (2021). Aligning AI With Shared Human Values</a></p></li>
+<li><p><a class="reference external" href="https://dl.acm.org/doi/pdf/10.1145/3351095.3372829">Jo &amp; Gebru (2020). Lessons from Archives: Strategies for Collecting Sociocultural Data in Machine Learning</a></p></li>
 </ul>
 </section>
 </section>
@@ -454,22 +444,13 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Unblackboxing_evals.html"
+       href="Evaluation-RL-review.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Evaluating LLMs: Part 2</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="Evaluation-RL-review.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">RL fine-tuning: Outlook</p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -488,7 +469,6 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#student-presentations">Student presentations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-paper-discussed-in-the-lecture">Further paper discussed in the lecture</a></li>
 </ul>
   </nav></div>
 
