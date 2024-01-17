@@ -1,6 +1,6 @@
 # Limitations & Implications of LLMs: Part 1
 
-In this a next sessions, we will focus more on potential limitations of LLMs and technology around them. Furthermore, we will start discussing important social implications and aspects that need to be considered when ML systems like LLMs are embedded in user-facing "real-world" applications. Some current work on assessing the limitations of LLMs as well as their social implications awill be presented by students. 
+In this a next sessions, we will focus more on potential limitations of LLMs and technology around them. Furthermore, we will start discussing important social implications and aspects that need to be considered when ML systems like LLMs are embedded in user-facing "real-world" applications. Some current work on assessing the limitations of LLMs as well as their social implications will be presented by students. 
 
 The slides for the session can be found [here](<https://polina-tsvilodub.github.io/RL4-language-model-training/10a-Social-implications.pdf>).
 
