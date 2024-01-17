@@ -46,6 +46,6 @@ The course schedule below is *preliminary*.
 | --         | --            | **Christmas break**                                                                                   |
 | 10         | January 10th  | Effects of RL: Social implications                                                                    |
 | 11         | January 17th  | Limitations of RL for language model training                                                         |
-| 12         | January 24th  | LLMs as a concept: simulators, agents, classifiers                                                    |
-| 13         | January 31st  | Final session (final assignment)                                                                                  |
+| 12         | January 24th  | LLMs and RL in larger systems                                                    |
+| 13         | January 31st  | Final session (recap and outlook)                                                                                 |
 |            | February 7th  | **no class**                                                                                          |
