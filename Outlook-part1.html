@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>RL fine-tuning: Outlook &#8212; Reinforcement Learning for Language Model Training</title>
+    <title>Outlook: LLMs &#8212; Reinforcement Learning for Language Model Training</title>
   
   
   
@@ -62,11 +62,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Evaluation-RL-review';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Outlook-part1';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Limitations &amp; Implications of LLMs: Part 1" href="Limitations_social-implications-part1.html" />
-    <link rel="prev" title="Evaluating LLMs: Part 3" href="Calibration.html" />
+    <link rel="next" title="Homework 3" href="homework3.html" />
+    <link rel="prev" title="Limitations &amp; Implications of LLMs: Part 2" href="Limitations_social-implications-part2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -185,10 +185,10 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Unblackboxing_evals.html">Evaluating LLMs: Part 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Calibration.html">Evaluating LLMs: Part 3</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">RL fine-tuning: Outlook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Evaluation-RL-review.html">RL fine-tuning: Outlook</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Limitations_social-implications-part1.html">Limitations &amp; Implications of LLMs: Part 1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Limitations_social-implications-part2.html">Limitations &amp; Implications of LLMs: Part 2</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="Outlook-part1.html">Outlook: LLMs</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Outlook: LLMs</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="homework3.html">Homework 3</a></li>
 </ul>
 </li>
@@ -263,7 +263,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/polina-tsvilodub/RL4-language-model-training/issues/new?title=Issue%20on%20page%20%2FEvaluation-RL-review.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/polina-tsvilodub/RL4-language-model-training/issues/new?title=Issue%20on%20page%20%2FOutlook-part1.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -293,7 +293,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/Evaluation-RL-review.md" target="_blank"
+      <li><a href="_sources/Outlook-part1.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -377,7 +377,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>RL fine-tuning: Outlook</h1>
+    <h1>Outlook: LLMs</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -388,7 +388,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#student-presentations">Student presentations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-paper-discussed-in-the-lecture">Further paper discussed in the lecture</a></li>
 </ul>
             </nav>
         </div>
@@ -400,32 +399,21 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="rl-fine-tuning-outlook">
-<h1>RL fine-tuning: Outlook<a class="headerlink" href="#rl-fine-tuning-outlook" title="Permalink to this heading">#</a></h1>
-<p>THis session provides an outlook to aspects that are important when evaluating systems which are trained with RL, as well as an outlook to another field of NLP where RL has been used in connection with communication.</p>
-<p>In particular, the first part of the session discusses RL from the perspective of <strong>alignment</strong> – a term referring to, broadly, making a system’s behavior and “goals” congruent with a set of human goals. Specifically, RLHF has been commonly discussed as an alignment technique for LLMs in the current literature, by providing a technique for making LLMs, e.g., helpful (which is a goal humans would like the LLMs to follow). However, one important caveat of RL is that its set-up provides a representation of the goal the agent needs to learn to achieve, but <em>does not</em> by default provide information on <strong>how</strong> to achieve the goal. This might lead to so-called <em>reward hacking</em>, i.e., a phenomenon whereby the agent learns to accumulate high rewards according to the given reward function (i.e., apparently achieve the goal) but does so in the “wrong” way (e.g., an autonomous vehicle could learn to get to its destination as quickly as possible by driving over pedestrians and red lights).</p>
-<p>The notion of alignment and topics around it will be discussed in more detail in the next sessions. In this class we only take a brief outlook at a <em>process-supervised reward modeling</em> approach which could help alleviate the issue of achieving the right result in the wrong way.</p>
-<p>The second part of the session (student presentation) provides an outlook to so-called <em>multi-agent communication</em> experiments. In this set up, RL is used to train an agent to solve a task (with RL) based on direct interaction with another artificial agent. This can be seen as a generalization of the RLAIF idea which was discussed a few sessiona go.
-The focus of this presentation is a phenomenon related to reward hacking but appearing in communication games where agents use natural language – <strong>language drift</strong>.</p>
-<p>The learning goals for this session are:</p>
-<ul class="simple">
-<li><p>think about how to evaluate RL-trained agents,</p></li>
-<li><p>understand the issues behind falsely specified RMs</p></li>
-<li><p>understand the difference between outcome- and process-superviesd RMs,</p></li>
-<li><p>familiarize ourselves with the idea of multi-agent communication experiments.</p></li>
-</ul>
-<p>The slides for the session can be found <a class="reference external" href="https://polina-tsvilodub.github.io/RL4-language-model-training/09a-Advanced-evals-part2.pdf">here</a>.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="outlook-llms">
+<h1>Outlook: LLMs<a class="headerlink" href="#outlook-llms" title="Permalink to this heading">#</a></h1>
+<p>In this session, we take a brief detour to systems which are more complex than “just consisting of an LLM”. Specifically, due to their improved performance on various tasks beyond sentence completion and due to the amount of ‘general world knowledge’ that modern LLMs seem to encode, more and more larger architectures / systems have started using LLMs as building blocks. Such systems use LLMs for various purposes, from sentence generation and formatting, over planning tasks to coding assistance, and special packages like <code class="docutils literal notranslate"><span class="pre">LangChain</span></code> have been built to facilitate integrating LLMs within larger systems.</p>
+<p>Conversely, one can view these systems as LLMs augmented with various tools; such LLMs are sometimes called <em>agents</em>. Presentations this week will showcase two systems with different purposes where modern LLMs are used as core components of more complicated systems.</p>
+<p>Furthermore, the session provides a brief outlook to conceptual discussion surrounding LLMs, their nature, and to which extent current fine-tuning techniques might contribute to safety.</p>
+<p>The slides for the session can be found <a class="reference external" href="https://polina-tsvilodub.github.io/RL4-language-model-training/12a-Agents-outlook.pdf">here</a>.</p>
 <section id="student-presentations">
 <h2>Student presentations<a class="headerlink" href="#student-presentations" title="Permalink to this heading">#</a></h2>
-<p>The paper about language drift in the context of multi-agent communication by <a class="reference external" href="https://arxiv.org/pdf/1909.04499.pdf">Lee et al., (2019)</a> will be discussed in a student presentation.</p>
-</section>
-<section id="further-paper-discussed-in-the-lecture">
-<h2>Further paper discussed in the lecture<a class="headerlink" href="#further-paper-discussed-in-the-lecture" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://arxiv.org/pdf/2305.11707.pdf">Giullianelli et al. (2023). What Comes Next? Evaluating Uncertainty in Neural Text Generators Against Human Production Variability</a></p></li>
-<li><p><a class="reference external" href="https://cdn.openai.com/improving-mathematical-reasoning-with-process-supervision/Lets_Verify_Step_by_Step.pdf">Lightman et al. (2023). Let’s Verify Step by Step</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/2304.03442.pdf">Park et al. (2023). Generative Agents: Interactive Simulacra of Human Behavior</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/2204.01691.pdf">Ahn et al. (2022). Do As I Can, Not As I Say: Grounding Language in Robotic Affordances</a></p></li>
 </ul>
 </section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -459,20 +447,20 @@ The focus of this presentation is a phenomenon related to reward hacking but app
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Calibration.html"
+       href="Limitations_social-implications-part2.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Evaluating LLMs: Part 3</p>
+        <p class="prev-next-title">Limitations &amp; Implications of LLMs: Part 2</p>
       </div>
     </a>
     <a class="right-next"
-       href="Limitations_social-implications-part1.html"
+       href="homework3.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Limitations &amp; Implications of LLMs: Part 1</p>
+        <p class="prev-next-title">Homework 3</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -493,7 +481,6 @@ The focus of this presentation is a phenomenon related to reward hacking but app
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#student-presentations">Student presentations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-paper-discussed-in-the-lecture">Further paper discussed in the lecture</a></li>
 </ul>
   </nav></div>
 
