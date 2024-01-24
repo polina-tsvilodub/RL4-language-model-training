@@ -19,3 +19,6 @@ chapters:
 - file: Evaluation-RL-review
 - file: Limitations_social-implications-part1
 - file: Limitations_social-implications-part2
+- file: Outlook-part1
+  sections:
+      - file: homework3
