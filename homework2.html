@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Homework 2 &#8212; Reinforcement Learning for Language Model Training</title>
   
@@ -29,39 +28,43 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'homework2';</script>
@@ -162,7 +165,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -194,6 +208,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="homework3.html">Homework 3</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="Outlook-part2.html">Outlook &amp; Recap</a></li>
 </ul>
 
     </div>
@@ -440,7 +455,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="homework-2">
-<h1>Homework 2<a class="headerlink" href="#homework-2" title="Permalink to this heading">#</a></h1>
+<h1>Homework 2<a class="headerlink" href="#homework-2" title="Link to this heading">#</a></h1>
 <p>The learning goals for the second hands-on sheet is to gain practical experience with the concepts we discussed throughout the recent sessions in class. In particular, the exercise will focus on:</p>
 <ul class="simple">
 <li><p>the human feedback which goes into RLHF and provide practical questions about a publich RLHF dataset which is commonly used for finetuning LLMs</p></li>
@@ -451,7 +466,7 @@ document.write(`
 It is <em>not</em> meant to dismay you. Therefore, even if you don’t have a lot of ML / programming / technical background, you are warmly encouraged to take on the tasks, ask questions and discuss any concerns you have (with fellow students or me). There are also some hints and links to resources throughout the tasks which may help you get information which will help solving the tasks.</p>
 <p>Some of the linked resources include, e.g., libraries or links to functions from libraries which may implement some of the tasks that are included in this homework. However, the provided started code intentionally spells out many steps “by hand” rather than using convenience functions from libraries. This is also meant to help you becom familiar with critical computation steps which might be hidden behind such libraries.</p>
 <section id="homework-logistics">
-<h2>Homework logistics<a class="headerlink" href="#homework-logistics" title="Permalink to this heading">#</a></h2>
+<h2>Homework logistics<a class="headerlink" href="#homework-logistics" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>You will have two weeks to complete the assignment (<strong>until Saturday, December 23rd, 6pm German time</strong>).</p></li>
 <li><p><strong>Please do and submit your homework by yourself!</strong></p></li>
@@ -461,7 +476,7 @@ It is <em>not</em> meant to dismay you. Therefore, even if you don’t have a lo
 </ul>
 </section>
 <section id="preliminaries">
-<h2>Preliminaries<a class="headerlink" href="#preliminaries" title="Permalink to this heading">#</a></h2>
+<h2>Preliminaries<a class="headerlink" href="#preliminaries" title="Link to this heading">#</a></h2>
 <p>The exercises below will require you to execute Python code. You can do so either on your own machine, or by using <a class="reference external" href="https://colab.research.google.com/">Google Colab</a> (free, only requires a Google account). You can easily do the latter by pressing the Colab icon at the top of the webook’s page.
 You are encouraged to use the Colab option to avoid complications with local package installations etc.
 To speed up the execution of the code on Colab (especially Exercise 2 and 3), you can use the available GPU. For that, before executing your code, navigate to Runtime &gt; Change runtime type &gt; GPU &gt; Save.</p>
@@ -471,7 +486,7 @@ To speed up the execution of the code on Colab (especially Exercise 2 and 3), yo
 <p>Please note that you may want to save your fine-tuned model in exercise 2 in order to be able to re-use it later. Improtantly, sessions on Colab only persist information (including files saved to the session drive) as long as your runtime is connected. Therefore, please download your model to your local machine or mount Colab to your Google drive (see instructions in Exercise 2).</p>
 </section>
 <section id="exercise-1-10-points">
-<h2>Exercise 1 (10 points)<a class="headerlink" href="#exercise-1-10-points" title="Permalink to this heading">#</a></h2>
+<h2>Exercise 1 (10 points)<a class="headerlink" href="#exercise-1-10-points" title="Link to this heading">#</a></h2>
 <p>In this exercise, we will look at the aspect of human feedback in the RLHF pipeline which we discussed from a more theoretical perspective in course sessions.</p>
 <p>Your job for this exercise is to inspect an open-source human-feedback dataset provided by researchers from Anthropic.</p>
 <p><strong>TASK:</strong></p>
@@ -487,9 +502,9 @@ To speed up the execution of the code on Colab (especially Exercise 2 and 3), yo
 </ul>
 </section>
 <section id="exercise-2-25-points">
-<h2>Exercise 2 (25 points)<a class="headerlink" href="#exercise-2-25-points" title="Permalink to this heading">#</a></h2>
+<h2>Exercise 2 (25 points)<a class="headerlink" href="#exercise-2-25-points" title="Link to this heading">#</a></h2>
 <p>In this task, we will fine-tuned our very own LM with reinforcement learning!</p>
-<p>We will use reinforcement learning to fine-tune a pretrained language model for the task of <em>positive review generation</em>. Specifically, we will fine-tune an LM for generating a positive movie review continuation based on a partial reivew provided as input. The continuation should be positive even if the input was negative. For this, we will use the <span class="xref myst">IMDB dataset</span> of movie reviews (we will only use a half of the train split to speed up training). The task is inspired by the IMDB task from <a class="reference external" href="https://arxiv.org/pdf/2210.01241.pdf">this paper</a>.
+<p>We will use reinforcement learning to fine-tune a pretrained language model for the task of <em>positive review generation</em>. Specifically, we will fine-tune an LM for generating a positive movie review continuation based on a partial reivew provided as input. The continuation should be positive even if the input was negative. For this, we will use the <a class="reference internal" href="#%5Bimdb%5D(https://huggingface.co/datasets/imdb?row=5)"><span class="xref myst">IMDB dataset</span></a> of movie reviews (we will only use a half of the train split to speed up training). The task is inspired by the IMDB task from <a class="reference external" href="https://arxiv.org/pdf/2210.01241.pdf">this paper</a>.
 For example, we want the fine-tuned model to do the following:</p>
 <p>Example input: “I would put this at the top of my list of films “</p>
 <p>Example model prediction we want: “which I would recoomend to all of my friends. Great movie!”</p>
@@ -618,7 +633,7 @@ We assume that the classifier provides “ground truth” labels of the sentimen
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example prediction of the pretrained policy model:  This movie is!!!&lt;|endoftext|&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example prediction of the pretrained policy model:  This movie is iced up with humor, humor, and some good, deep thoughts. It is
 </pre></div>
 </div>
 </div>
@@ -867,7 +882,7 @@ In particular, since we want to train a system to predict review continuations g
 </div>
 </div>
 <section id="saving-the-trained-model">
-<h3>Saving the trained model<a class="headerlink" href="#saving-the-trained-model" title="Permalink to this heading">#</a></h3>
+<h3>Saving the trained model<a class="headerlink" href="#saving-the-trained-model" title="Link to this heading">#</a></h3>
 <p>We will use the trained model in the next erxercise; therefore, it should be save if you want to re-use it for exercise 3 at a later point. You can save the model to your Google Drive, if you are working on Colab, or locally.</p>
 <p>When you execute the following cell, you will be prompted to authorize Colab to access your Drive (this is a prerequisite for using this functionality, unfortunately). Please follow the displayed instructions and then execute the following code cells. Once executed, please double-check that you Drive now indeed contains your model, so as to not loose your work.</p>
 <p>Alternatively, if you do not wish to have Colab access your Drive, you can just manually download your model. To do so, please skip the next two cells, and just execute the saving cell after. Then, navigate to the directory symbol on the left panel of Colab, right-click on the new model directory and download it. If you work on a local machine, also just execute this local saving code cell.</p>
@@ -921,7 +936,7 @@ Please answer the respective questions about the plots on Moodle.</p>
 </section>
 </section>
 <section id="exercise-3-15-points">
-<h2>Exercise 3 (15 points)<a class="headerlink" href="#exercise-3-15-points" title="Permalink to this heading">#</a></h2>
+<h2>Exercise 3 (15 points)<a class="headerlink" href="#exercise-3-15-points" title="Link to this heading">#</a></h2>
 <p>Finally, we will get our hands dirty with evaluating LLMs which already have been trained. In this task, we will use a few tasks from one of the most-used LM benchmarks, the <a class="reference external" href="https://super.gluebenchmark.com/">SuperGLUE benchmark</a>:</p>
 <ul class="simple">
 <li><p>a natural language inference (NLI) task “rte”,</p>

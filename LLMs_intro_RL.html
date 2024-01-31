@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Language Model Training &amp; Introduction to RL &#8212; Reinforcement Learning for Language Model Training</title>
   
@@ -29,39 +28,43 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'LLMs_intro_RL';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -160,7 +163,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -192,6 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="homework3.html">Homework 3</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="Outlook-part2.html">Outlook &amp; Recap</a></li>
 </ul>
 
     </div>
@@ -405,17 +420,17 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="language-model-training-introduction-to-rl">
-<h1>Language Model Training &amp; Introduction to RL<a class="headerlink" href="#language-model-training-introduction-to-rl" title="Permalink to this heading">#</a></h1>
+<h1>Language Model Training &amp; Introduction to RL<a class="headerlink" href="#language-model-training-introduction-to-rl" title="Link to this heading">#</a></h1>
 <p>In this session, the familiarization with the core concepts around language models is wrapped up. Training of language models is shortly discussed, so as to recap terms which are important for understanding fine-tuning of LMs with RL.
 Furthermore, a conceptual motivation and a high-level introduction to reinforcement learning (RL) is provided.</p>
 <section id="transformers-training-and-rl">
-<h2>Transformers, Training and RL<a class="headerlink" href="#transformers-training-and-rl" title="Permalink to this heading">#</a></h2>
+<h2>Transformers, Training and RL<a class="headerlink" href="#transformers-training-and-rl" title="Link to this heading">#</a></h2>
 <p>In this session, some additional details of the transformers architecure are discussed. Then, teacher-forcing based training of language models is briefly reviewed. Important concepts around inference with trained LMs (e.g., decoding schemes, prompting) are highlighted. This concludes the basic introduction / recap of core language models.</p>
 <p>The second part of the session motivates reinforcement learning in the context of LMs and briefly situates it in the field of machine learning. Then, core concepts of RL like states, actions, policy etc. are introduced. The introduction is rather informal; the main goal is to develop some intuitions about these terms.</p>
 <p>Slides for the session can be found <a class="reference external" href="https://polina-tsvilodub.github.io/RL4-language-model-training/02a-LLMs-training-RL.pdf">here</a>.</p>
 </section>
 <section id="further-materials-optional">
-<h2>Further materials (optional)<a class="headerlink" href="#further-materials-optional" title="Permalink to this heading">#</a></h2>
+<h2>Further materials (optional)<a class="headerlink" href="#further-materials-optional" title="Link to this heading">#</a></h2>
 <p>Below, further materials on transformers, language model training, decoding schemes and basic RL concepts can be found.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://arxiv.org/pdf/2104.09864.pdf">Rotatory Position Embeddings (RoPE): a popular SOTA positional encoding methods used in, e.g., LLaMA</a></p></li>
@@ -432,7 +447,7 @@ Furthermore, a conceptual motivation and a high-level introduction to reinforcem
 <li><p>[<strong>Sutton &amp; Barto (2018). Reinforcement learning: An Introduction.</strong>](<a class="reference external" href="https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf">https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf</a></p></li>
 </ul>
 <section id="further-materials-on-programming-for-rl-optional">
-<h3>Further materials on programming for RL (optional)<a class="headerlink" href="#further-materials-on-programming-for-rl-optional" title="Permalink to this heading">#</a></h3>
+<h3>Further materials on programming for RL (optional)<a class="headerlink" href="#further-materials-on-programming-for-rl-optional" title="Link to this heading">#</a></h3>
 <p>Below are some suggestions of practical materials for RL. However, note that most introductions on Youtube etc cover specific libraries or environments commonly used in RL. You are not required to get into the details of those for the course (unless you want to). We might use more specific libraries later in the course. Basic understanding of how to use libraries in general, as well as understanding of PyTorch and maybe basic deep learning in PyTorch will be sufficient.</p>
 <ul class="simple">
 <li><p>[A blog post implementing an RL environment in Python (presupposes Python familiarity)](<a class="reference external" href="https://towardsdatascience.com/hands-on-introduction-to-reinforcement-learning-in-python-da07f7aaca88">https://towardsdatascience.com/hands-on-introduction-to-reinforcement-learning-in-python-da07f7aaca88</a></p></li>
@@ -441,7 +456,7 @@ Furthermore, a conceptual motivation and a high-level introduction to reinforcem
 <li><p>working with the Gym environment for all kinds of RL algorithms which also go beyond the scope of the class</p></li>
 </ul>
 </li>
-<li><p><a class="reference external" href="https://www.youtube.com/watch?v=EMXfZB8FVUA&amp;list=PLqnslRFeH2UrcDBWF5mfPGpqQDSta6VK4">Introduction to PyTorch tutorials</a></p>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=EMXfZB8FVUA&amp;amp;list=PLqnslRFeH2UrcDBWF5mfPGpqQDSta6VK4">Introduction to PyTorch tutorials</a></p>
 <ul>
 <li><p>basic and general (not specific to RL), but the essential PyTorch functionality will be used for our RL experiments and will help understand other more high-level libraries which will be used specifically for RL.</p></li>
 </ul>
@@ -450,7 +465,7 @@ Furthermore, a conceptual motivation and a high-level introduction to reinforcem
 </section>
 </section>
 <section id="homework">
-<h2>Homework<a class="headerlink" href="#homework" title="Permalink to this heading">#</a></h2>
+<h2>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h2>
 <p>The first homework is out! In this homework, you will get a chance to try concepts we discussed so far hands-on. Please find the exercise sheet and all instructions on the next page.</p>
 </section>
 <div class="toctree-wrapper compound">

@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Language Models: Introduction &#8212; Reinforcement Learning for Language Model Training</title>
   
@@ -29,39 +28,43 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'LLMs';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -160,7 +163,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -192,6 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="homework3.html">Homework 3</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="Outlook-part2.html">Outlook &amp; Recap</a></li>
 </ul>
 
     </div>
@@ -406,25 +421,25 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="language-models-introduction">
-<h1>Language Models: Introduction<a class="headerlink" href="#language-models-introduction" title="Permalink to this heading">#</a></h1>
+<h1>Language Models: Introduction<a class="headerlink" href="#language-models-introduction" title="Link to this heading">#</a></h1>
 <p>The goal of the introductory session is to motivate the course, cover formalia and start a recap of relevant background on (large) language models (LLMs).</p>
 <section id="large-language-models-llms-a-high-level-overview">
-<h2>Large Language Models (LLMs): a high-level overview<a class="headerlink" href="#large-language-models-llms-a-high-level-overview" title="Permalink to this heading">#</a></h2>
+<h2>Large Language Models (LLMs): a high-level overview<a class="headerlink" href="#large-language-models-llms-a-high-level-overview" title="Link to this heading">#</a></h2>
 <p>The introductory part of the slides briefly introduces topics that will be covered throughout the class.</p>
 <p>In the second part, the core ideas behind language models are introduced. In particular, the slides cover the core idea behind language models, namely, the <em>next-word prediction task</em>. Further, the slides include a bsic introduction to the main architecture used in state-of-the-art language models, the <em>transformer</em>. Some further technical aspects of language models are discussed. The session highlights only those technical aspects of language models which are most relevant for models which are fine-tuned with RL; for more comprehensive materials on LMs in general, see <a class="reference internal" href="#content-materials-lms"><span class="std std-ref">further materials on LMs.</span></a></p>
 <p>Slides for the session can be found <a class="reference external" href="https://polina-tsvilodub.github.io/RL4-language-model-training/01a-intro-LLMs.pdf">here</a>.</p>
 </section>
 <section id="further-materials-optional">
-<h2>Further materials (optional)<a class="headerlink" href="#further-materials-optional" title="Permalink to this heading">#</a></h2>
+<h2>Further materials (optional)<a class="headerlink" href="#further-materials-optional" title="Link to this heading">#</a></h2>
 <p>Below, further background materials on langauge models can be found. Additionally, resources for trying language models hands-on and preparing for the practical parts of the class are provided.</p>
 <section id="language-models">
-<span id="content-materials-lms"></span><h3>Language models<a class="headerlink" href="#language-models" title="Permalink to this heading">#</a></h3>
+<span id="content-materials-lms"></span><h3>Language models<a class="headerlink" href="#language-models" title="Link to this heading">#</a></h3>
 <p>Below you can find a few basic optional recommendations for resources on all sort of LMs (including n-gram models, recurrent neural networks, etc) which have been developed in CL and NLP. Classical papers (also introducing concepts which are covered on the class) are referenced, as well.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://arxiv.org/pdf/2303.05759.pdf">Wei et al. (2023) An overview of language models.</a></p></li>
 <li><p><a class="reference external" href="https://web.stanford.edu/~jurafsky/slp3/3.pdf">Chapter on n-gram LMs from Jurafksy &amp; Martin. (2023) <em>Speech and Language Processing.</em></a></p></li>
-<li><p><a class="reference external" href="https://www.youtube.com/watch?v=PLryWeHPcBs&amp;list=PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ&amp;index=5">Lecture on RNNs from Stanford class “NLP with Deep Learning”</a></p></li>
-<li><p><a class="reference external" href="https://www.youtube.com/watch?v=0LixFSa7yts&amp;list=PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ&amp;index=6">Lecture on LSTMs from Stanford class “NLP with Deep Learning”</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=PLryWeHPcBs&amp;amp;list=PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ&amp;amp;index=5">Lecture on RNNs from Stanford class “NLP with Deep Learning”</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=0LixFSa7yts&amp;amp;list=PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ&amp;amp;index=6">Lecture on LSTMs from Stanford class “NLP with Deep Learning”</a></p></li>
 <li><p><a class="reference external" href="https://www.bioinf.jku.at/publications/older/2604.pdf">Paper introducing LSTMs</a></p></li>
 <li><p><a class="reference external" href="https://aclanthology.org/N19-1423.pdf">Paper introducing the BERT model (one of the most-used architectures before GPT et al.)</a></p></li>
 <li><p><a class="reference external" href="https://arxiv.org/pdf/1409.0473.pdf">Paper introducing additive attention (predecessor attention mechanism to multiplicative attention used in current transformers)</a></p></li>
@@ -432,7 +447,7 @@ document.write(`
 </ul>
 </section>
 <section id="where-to-try-llms">
-<h3>Where to try LLMs<a class="headerlink" href="#where-to-try-llms" title="Permalink to this heading">#</a></h3>
+<h3>Where to try LLMs<a class="headerlink" href="#where-to-try-llms" title="Link to this heading">#</a></h3>
 <p>Below you can find links where you could try state-of-the-art LLMs yourself. Please note that accessing the fanciest models requires creating accounts. The use of some models by OpenAI might even require to pay. Using the OpenAI API for accessing the models also requires to pay once the free credits one gets upon signing up are used up. Please note that <strong>you are not expected to pay</strong> for using these models in this class. Please contact me if you do have any issues  regarding model use. The first options provide a graphical interface for exploration; the last two points require programming. Later sessions of the class will also cover some basics of programmatic access of available models. Some of the referenced models are hosted on HiggingFace, a library and platform providing tools for using LMs (and other machine learning models). We will be using HuggingFace throughout the class; for an introduction, see <a class="reference internal" href="#content-materials-practical"><span class="std std-ref">practical materials</span></a></p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://chat.openai.com/">ChatGPT</a>: This chat model provided by OpenAI requires an account, but allows you to play around for free using the nice graphical chat interface.</p></li>
@@ -451,7 +466,7 @@ document.write(`
 <p>There are several other big players (e.g., PALM by Google) in the field of LLMs which are not available for public testing or don’t have graphical test interfaces. We will discuss currently main models in the next sessions in more detail.</p>
 </section>
 <section id="preparing-for-practical-programming-tasks">
-<span id="content-materials-practical"></span><h3>Preparing for practical programming tasks<a class="headerlink" href="#preparing-for-practical-programming-tasks" title="Permalink to this heading">#</a></h3>
+<span id="content-materials-practical"></span><h3>Preparing for practical programming tasks<a class="headerlink" href="#preparing-for-practical-programming-tasks" title="Link to this heading">#</a></h3>
 <p>The following is a list of additional material, in case you would like to recap various topics (at different levels) which will come in handy in the next sessions. These are not a prerequisite for the next classes and we will walk through all the important concepts in class. Of course, these are just single suggestions in the sea of content on the internet meant to kick start the recommendation algorithm – you are welcome to browse and choose your own favorites.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.youtube.com/watch?v=kqtD5dpn9C8">Basic Python recap (1h)</a></p></li>

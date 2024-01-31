@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Homework 3 &#8212; Reinforcement Learning for Language Model Training</title>
   
@@ -29,42 +28,47 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'homework3';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Outlook &amp; Recap" href="Outlook-part2.html" />
     <link rel="prev" title="Outlook: LLMs" href="Outlook-part1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -159,7 +163,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -191,6 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Homework 3</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="Outlook-part2.html">Outlook &amp; Recap</a></li>
 </ul>
 
     </div>
@@ -444,7 +460,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="homework-3">
-<h1>Homework 3<a class="headerlink" href="#homework-3" title="Permalink to this heading">#</a></h1>
+<h1>Homework 3<a class="headerlink" href="#homework-3" title="Link to this heading">#</a></h1>
 <p>The learning goals for the final hands-on sheet is to practice critical and creative thinking around LLMs and gain some practical experience with the concepts we discussed throughout the recent sessions in class. In particular, the exercise will focus on:</p>
 <ul class="simple">
 <li><p>thinking about potential cultural and linguistic biases that LLMs might exhibit,</p></li>
@@ -455,7 +471,7 @@ document.write(`
 <p>Again, the homework is intended to showcase important practical aspects, further conceptual understanding of the topics we discuss in class and provide practical tools and exercise for your own future work.
 It is <em>not</em> meant to dismay you. Therefore, even if you don’t have a lot of ML / programming / technical background, you are warmly encouraged to take on the tasks, ask questions and discuss any concerns you have (with fellow students or me). There are also some hints and links to resources throughout the tasks which may help you get information which will help solving the tasks.</p>
 <section id="homework-logistics">
-<h2>Homework logistics<a class="headerlink" href="#homework-logistics" title="Permalink to this heading">#</a></h2>
+<h2>Homework logistics<a class="headerlink" href="#homework-logistics" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>You will have a bit more than two weeks to complete the assignment (<strong>until Sunday, February 11th, 6pm German time</strong>).</p></li>
 <li><p><strong>Please do and submit your homework by yourself!</strong></p></li>
@@ -465,7 +481,7 @@ It is <em>not</em> meant to dismay you. Therefore, even if you don’t have a lo
 </ul>
 </section>
 <section id="preliminaries">
-<h2>Preliminaries<a class="headerlink" href="#preliminaries" title="Permalink to this heading">#</a></h2>
+<h2>Preliminaries<a class="headerlink" href="#preliminaries" title="Link to this heading">#</a></h2>
 <p>The exercises below will require you to execute Python code. You can do so either on your own machine, or by using <a class="reference external" href="https://colab.research.google.com/">Google Colab</a> (free, only requires a Google account). You can easily do the latter by pressing the Colab icon at the top of the webook’s page.
 You are encouraged to use the Colab option to avoid complications with local package installations etc.
 To speed up the execution of the code on Colab (especially Exercise 2), you can use the available GPU. For that, before executing your code, navigate to Runtime &gt; Change runtime type &gt; GPU &gt; Save.</p>
@@ -473,7 +489,7 @@ To speed up the execution of the code on Colab (especially Exercise 2), you can 
 <p>Note that the class uses PyTorch. For those of you who wish to complete final projects which include programming, you are also free to use TensorFlow for that (but I may be able to provide less support with that).</p>
 </section>
 <section id="exercise-1-15-points">
-<h2>Exercise 1 (15 points)<a class="headerlink" href="#exercise-1-15-points" title="Permalink to this heading">#</a></h2>
+<h2>Exercise 1 (15 points)<a class="headerlink" href="#exercise-1-15-points" title="Link to this heading">#</a></h2>
 <p>In this exercise, we will consider aspects of LLM performance which may have social implications, e.g., we will consider possible biases as well as try to understand which cultures maybe (under)represented by available LLMs. The goal of this task is to construct your own test vignette (i.e., a test item that roughly looks like the items in the ETHICS dataset that we saw in class) for investigating cultural biases of LLMs.</p>
 <p>The task is to come up with an example test prompt (e.g., informed by your cultural background or exposure) which contains multiple-choice responses where one response would be more acceptable under one particular cultural lense and another response under a different cultural background.</p>
 <p><strong>Simple example:</strong> (possible variation in italics, explanations in parentheses)</p>
@@ -655,7 +671,7 @@ To speed up the execution of the code on Colab (especially Exercise 2), you can 
 </div>
 </div>
 <section id="your-response">
-<h3>Your response<a class="headerlink" href="#your-response" title="Permalink to this heading">#</a></h3>
+<h3>Your response<a class="headerlink" href="#your-response" title="Link to this heading">#</a></h3>
 <p><strong>Your prompt</strong> (with explanation of expected responses in respective cultural variations): …</p>
 <p><strong>Your model likelihoods:</strong></p>
 <table class="table">
@@ -689,14 +705,14 @@ To speed up the execution of the code on Colab (especially Exercise 2), you can 
 </section>
 </section>
 <section id="exercise-2-20-points">
-<h2>Exercise 2 (20 points)<a class="headerlink" href="#exercise-2-20-points" title="Permalink to this heading">#</a></h2>
+<h2>Exercise 2 (20 points)<a class="headerlink" href="#exercise-2-20-points" title="Link to this heading">#</a></h2>
 <p>The goal of this exercise is to become even more familiar with hands-on “real” RL fine-tuning – we will look at training a summarization model with PPO. We will start with a GPT-2 instance which was already supervised fine-tuned for sumarization.
 Oftentimes, common algorithms are shipped within specialized libraries, so that you don’t have to implement the complicated optimization math by yourself. When working on actual projects, such libraries are usually used. All that is required to get started is to try to understand how to correctly use the library and correctly apply it to your task.</p>
 <p>Therefore, your task here is to look at the code using the <code class="docutils literal notranslate"><span class="pre">trl</span></code> package for said fine-tuning below, <strong>find and fix mistakes</strong> and answer questions about parts of the code. Googling / research skills and critical thinking about unfamiliar code are required here! (think: you got some code from the programming assistant of your choice and now you need to double-check it before putting it into your customer-facing app)</p>
 <p><strong>Please indicate places where you corrected the code by inserting the comment <code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">FIXED</span> <span class="pre">MISTAKE</span> <span class="pre">###</span></code> next / above it!</strong></p>
 <p>Note that you DON’T have to train the model or even execute the code, if you don’t want to.</p>
 <section id="useful-materials-and-hints">
-<h3>Useful materials and hints:<a class="headerlink" href="#useful-materials-and-hints" title="Permalink to this heading">#</a></h3>
+<h3>Useful materials and hints:<a class="headerlink" href="#useful-materials-and-hints" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>see slides from session 4</p></li>
 <li><p><a class="reference external" href="https://huggingface.co/docs/trl/index">documentation and examples with the library <code class="docutils literal notranslate"><span class="pre">trl</span></code> that we are using here</a></p></li>
@@ -879,7 +895,7 @@ Oftentimes, common algorithms are shipped within specialized libraries, so that 
 </div>
 </section>
 <section id="id1">
-<h3>Your response:<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<h3>Your response:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>Please enter the required code explanations below:</p>
 <ul class="simple">
 <li><p>In max. three sentences, please explain what ROUGE is and how it works (conceptually):</p></li>
@@ -894,7 +910,7 @@ Oftentimes, common algorithms are shipped within specialized libraries, so that 
 </section>
 </section>
 <section id="exercise-3-15-points">
-<h2>Exercise 3 (15 points)<a class="headerlink" href="#exercise-3-15-points" title="Permalink to this heading">#</a></h2>
+<h2>Exercise 3 (15 points)<a class="headerlink" href="#exercise-3-15-points" title="Link to this heading">#</a></h2>
 <p>In this exercise, you will conceptualize an “agent” LLM!</p>
 <p>Specifically, inspired by the discussed library <a class="reference external" href="https://python.langchain.com/docs/get_started/introduction"><code class="docutils literal notranslate"><span class="pre">langchain</span></code></a>, we will create the blueprint for a personal scheduling agent.</p>
 <p>Your task is to write a step-by-step guide / blueprint for an LLM based agent that will put all important appointments from your email to your Google Calendar, but will filter out spam appointments from emails from your former school. The agent should make sure there are no scheduling conflicts, and inform the user if there are conflicts.</p>
@@ -918,7 +934,7 @@ The agent’s available tools are: a pdf converter (to plain text), standard llm
 </div>
 </div>
 <section id="id2">
-<h3>Your response:<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<h3>Your response:<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Please describe, step by step, how you would set up your agent to do the scheduling task for you:</p></li>
 <li><p>Please brainstorm two advantages and two disadvantages of using LLM agents (in general, not necessarily for this specific task):</p>
@@ -970,6 +986,15 @@ The agent’s available tools are: a pdf converter (to plain text), standard llm
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Outlook: LLMs</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="Outlook-part2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Outlook &amp; Recap</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
